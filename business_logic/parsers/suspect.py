@@ -1,4 +1,7 @@
-import requests, bs4
+from selenium import webdriver
+from config import proxies
+
+webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 
 
 url = "https://r49.fssp.gov.ru/iss/suspect_info"
@@ -7,4 +10,4 @@ headers = {
 }
 
 def check_suspect():
-    response = requests.get(url, headers = headers)
+    ...

@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_httpauth import HTTPBasicAuth
 from flask_mail import Mail
 from werkzeug.security import generate_password_hash
 
@@ -15,3 +16,8 @@ mail = Mail(app)
 app.config.from_pyfile('config.cfg')
 app.config['SECRET_KEY']='dKPOADPOAJSPJFP21Id;k!@43MF;SMKDSN,RMW@!#'
 auth = HTTPBasicAuth()
+proxies = {
+    "proxyType": "manual",
+    "httpProxy": "http://123.123.123.123:8080",
+    "httpsProxy": "https://123.123.123.123:8080",
+}

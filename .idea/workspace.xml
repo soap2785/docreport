@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="232f71b6-4c9f-4d75-b621-6e45688962e7" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/docreport.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business_logic/parsers/FNS.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business_logic/parsers/INN.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business_logic/parsers/captcha/captcha.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business_logic/parsers/suspect.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.cfg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/endpoints.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/yoo_pay.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/business_logic/parsers/captcha.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/business_logic/parsers/iss_ip.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/FNS.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/FNS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/INN.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/INN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha/captcha.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/suspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/suspect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +30,15 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/soap2785/docreport.git&quot;,
+    &quot;accountId&quot;: &quot;8e70943a-d0a6-49c9-b868-dac40b194b25&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -51,8 +54,10 @@
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.FNS.executor": "Run",
     "Python.civil_service.executor": "Run",
     "Python.civil_sservice.executor": "Run",
+    "Python.iss_ip.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -65,9 +70,56 @@
       <recent name="C:\Users\Game\PycharmProjects\docreport" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Game\PycharmProjects\docreport\business_logic\parsers" />
       <recent name="C:\Users\Game\PycharmProjects\docreport\business_logic\parsers\captcha" />
       <recent name="C:\Users\Game\PycharmProjects\docreport\parsers\parsers" />
     </key>
+  </component>
+  <component name="RunManager" selected="Python.iss_ip">
+    <configuration name="FNS" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="docreport" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/business_logic/parsers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/business_logic/parsers/FNS.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="iss_ip" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="docreport" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/business_logic/parsers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/business_logic/parsers/iss_ip.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>

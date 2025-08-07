@@ -1,5 +1,6 @@
 import requests
 
+from config import proxies
 
 def suggest_inn(surname, name, patronymic, birthdate, docnumber, docdate):
     url = "https://service.nalog.ru/inn-proc.do"
@@ -16,6 +17,6 @@ def suggest_inn(surname, name, patronymic, birthdate, docnumber, docdate):
         "captcha": "",
         "captchaToken": "",
     }
-    resp = requests.post(url=url, data=data)
+    resp = requests.post(url = url, data = data, proxies = proxies)
     resp.raise_for_status()
     return resp.json()

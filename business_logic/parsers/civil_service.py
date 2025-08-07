@@ -5,6 +5,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
+from config import proxies
+
+webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
+
 def check_civserv(surname, name, patronymic):
     """Ищет данные о государственных служащих, используя Selenium."""
 
@@ -27,37 +31,46 @@ def check_civserv(surname, name, patronymic):
 
         # Явное ожидание загрузки таблицы
         wait = WebDriverWait(driver, 10)
-        table = wait.until(
+        wait.until(
             EC.presence_of_element_located((By.CLASS_NAME, 'table.text-center.table-hover.text-xs.line-height-xs')) #Селектор таблицы
         )
 
         # Находим tbody
-        tbody = driver.find_elements(By.CSS_SELECTOR, 'tbody')
-        tr_elements = tbody[0].find_elements(By.CSS_SELECTOR, 'tr')
+        tr_elements = driver.find_elements(By.XPATH, '/html/body/app-root/div/section[4]/app-trust-loss-dismissal-records-list/div/app-trust-loss-dismissal-records-table/app-loader/div/div/table/tbody/tr[1]')
 
         if tr_elements:
             # Обрабатываем каждую строку
             for tr in tr_elements:
                 print(tr)
-                td_elements = tr.find_elements(By.TAG_NAME, 'td')
+                td_elements = tr.find_elements(By.CSS_SELECTOR, 'td')
                 print(td_elements)
                 print(101)
                 if td_elements:
                     for td in td_elements:
-                        ...
+                        try:
+                            print(td.text)
+                            print(102)
+                        except Exception as e:
+                            print('Произошла ошибка')
+                            if input() == 'y':
+                                print(e)
                 else:
                     try:
                         th = tr.find_element(By.CSS_SELECTOR, 'th')
                         print(th.text)
-                    except:
-                        print('Ничего не найдено')
+                    except Exception as e:
+                        print('Ничего не найдено:')
+                        if input() == 'y':
+                            print(e)
         else:
              print("Строки в таблице не найдены")
 
     except TimeoutException:
         print("Время ожидания истекло, таблица не загрузилась.")
     except Exception as e:
-        print(f"Произошла ошибка: {e}")
+        print(f"Произошла ошибка")
+        if input() == 'y':
+            print(e)
     finally:
         driver.quit()
 
