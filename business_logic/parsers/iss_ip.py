@@ -13,7 +13,7 @@ from config import proxies
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 url = 'https://fssp.gov.ru/iss/ip'
 chrome_options = Options()
-chrome_options.add_argument("--headless")  #Раскомментируйте, если хотите запустить в фоновом режиме
+chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument(
     "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
@@ -35,7 +35,6 @@ def iss_ip(region, surname, name, patronymic, birthdate):
                  "/html/body/div[2]/main/section/div/div/div[5]/div/form/div/div[2]/div/div/div/ul")  # Здесь лучше использовать более точный селектор для самого поля ввода, если есть
             )
         )
-        region_input.send_keys(region)
         region_input = driver.find_element(By.XPATH, '/html/body/div[2]/main/section/div/div/div[5]/div/form/div/div[2]/div/div/div/div/input')
         region_input.send_keys(region)
         region_input.send_keys(Keys.ENTER)
@@ -90,17 +89,20 @@ def iss_ip(region, surname, name, patronymic, birthdate):
         captcha_button = driver.find_element(By.XPATH, '/html/body/div[5]/div[1]/div[2]/div/div/div/form/div[2]/input[2]')
         captcha_button.click()
         time.sleep(1)
-        table = driver.find_element(By.XPATH, '//*[@id="content"]/div/div/div[3]/div/div/div[2]/table/tbody')
-        trs = table.find_elements(By.TAG_NAME, "tr")
-        data_abs = []
-        for tr in trs:
-            tds = tr.find_elements(By.TAG_NAME, 'td')
-            data_cur = []
-            for index, td in enumerate(tds):
-                if index not in (0, 3, 4, 7):
-                    data_cur.append(td.text)
-                data_abs.append(data_cur)
-        return data_abs
+        try:
+            table = driver.find_element(By.XPATH, '//*[@id="content"]/div/div/div[3]/div/div/div[2]/table/tbody')
+            trs = table.find_elements(By.TAG_NAME, "tr")
+            data_abs = []
+            for tr in trs:
+                tds = tr.find_elements(By.TAG_NAME, 'td')
+                data_cur = []
+                for index, td in enumerate(tds):
+                    if index not in (0, 3, 4, 7):
+                        data_cur.append(td.text)
+                    data_abs.append(data_cur)
+            return data_abs
+        except:
+            return ('Ничего не найдено')
 
 
     except Exception as e:
@@ -119,3 +121,4 @@ if __name__ == "__main__":
     patronymic_to_test = 'Артурович'
     birthdate_to_test = '16.08.1998'
     result = iss_ip(region_to_test, surname_to_test, name_to_test, patronymic_to_test, birthdate_to_test)
+    print(result)
