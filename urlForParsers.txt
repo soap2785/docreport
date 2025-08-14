@@ -3,4 +3,16 @@ INN https://service.nalog.ru/inn-proc.do (https://service.nalog.ru/inn.do в Т�
 civil_service https://gossluzhba.gov.ru/reestr?filters=%7B"fullName":null%7D&page=1 +
 iss_ip_search https://r49.fssp.gov.ru/iss/ip_search n/a
 iss_ip https://fssp.gov.ru/iss/ip +
-reestr_zalogov https://www.reestr-zalogov.ru/search/index n/a
+pledges_reg https://www.reestr-zalogov.ru/search/index n/a
+FNS https://egrul.nalog.ru/index.html n/a
+suspect https://r49.fssp.gov.ru/iss/suspect_info n/a
+ras_arbitration https://ras.arbitr.ru/ n/a
+kad_arbitration https://kad.arbitr.ru/ n/a
+wanted https://мвд.рф/wanted в процессе
+criminal https://fsin.gov.ru/criminal/ в процессе
+
+не обязательно:
+hereditary https://notariat.ru/ru-ru/help/probate-cases/ - не наблюдаются необходимые данные на docreport.ru
+search_debtors https://r49.fssp.gov.ru/search_debtors/ - 404
+interpol https://www.interpol.int/notice/search/wanted - временно недоступен
+migration http://сервисы.гувм.мвд.рф/info-service.htm?sid=2000 - недействительная ссылка
