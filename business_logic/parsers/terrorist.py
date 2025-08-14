@@ -41,6 +41,3 @@ def terrorist(surname, name, patronymic):
         return "Человек в базе террористов присутствует"
     else:
         return "Человек отстуствует в базе террористов"
-
-if __name__ == "__main__":
-    print(terrorist('КИЧИГИНА', 'ВАЛЕРИЯ', 'РАФАЭЛЕВНА'))
