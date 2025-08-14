@@ -112,13 +112,3 @@ def iss_ip(region, surname, name, patronymic, birthdate):
 
     finally:
         driver.quit()
-
-
-if __name__ == "__main__":
-    region_to_test = 'Магаданская область'
-    surname_to_test = 'Кудинов'
-    name_to_test = 'Игорь'
-    patronymic_to_test = 'Артурович'
-    birthdate_to_test = '16.08.1998'
-    result = iss_ip(region_to_test, surname_to_test, name_to_test, patronymic_to_test, birthdate_to_test)
-    print(result)

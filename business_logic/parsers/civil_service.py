@@ -19,7 +19,6 @@ driver = webdriver.Chrome(options=chrome_options)
 
 def check_civserv(surname, name, patronymic):
     url = f'https://gossluzhba.gov.ru/reestr?filters=%7B"fullName":"{surname}%20{name}%20{patronymic}"%7D&page=1'
-    print(url)
     if surname == ' ' and name == ' ' and patronymic == ' ':
         url = 'https://gossluzhba.gov.ru/reestr?filters=%7B"fullName":null%7D&page=1'
 
@@ -41,10 +40,3 @@ def check_civserv(surname, name, patronymic):
 
     except Exception as e:
         return f"Ошибка: {e}"
-
-
-
-if __name__ == "__main__":
-    print(check_civserv('Гилев', 'Станислав', 'Георгиевич'))
-    print(check_civserv('Гилеа', 'Станислав', 'Георгиевич'))
-    print(check_civserv(' ', ' ', ' '))
