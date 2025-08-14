@@ -20,7 +20,7 @@ chrome_options.add_argument(
 driver = webdriver.Chrome(options=chrome_options)
 
 
-def iss_ip(region, surname, name, patronymic, birthdate):
+def iss_ip(region, surname, name, patronymic, birthdate) -> list | str:
     try:
         driver.get(url)
 
@@ -102,13 +102,11 @@ def iss_ip(region, surname, name, patronymic, birthdate):
                     data_abs.append(data_cur)
             return data_abs
         except:
-            return ('Ничего не найдено')
+            return 'Ничего не найдено'
 
 
     except Exception as e:
-        print('Произошла ошибка')
-        if input() == 'y':
-            print(e)
+        return e
 
     finally:
         driver.quit()

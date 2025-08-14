@@ -16,7 +16,7 @@ chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64
 driver = webdriver.Chrome(options=chrome_options)
 
 
-def check_civserv(surname, name, patronymic):
+def check_civserv(surname, name, patronymic) -> list | str:
     url = f'https://gossluzhba.gov.ru/reestr?filters=%7B"fullName":"{surname}%20{name}%20{patronymic}"%7D&page=1'
     if surname == ' ' and name == ' ' and patronymic == ' ':
         url = 'https://gossluzhba.gov.ru/reestr?filters=%7B"fullName":null%7D&page=1'

@@ -16,7 +16,7 @@ driver = webdriver.Chrome(options=chrome_options)
 url = 'https://bankrot.fedresurs.ru/bankrupts'
 
 
-def bankrupt(inn, surname, name, patronymic):
+def bankrupt(inn, surname, name, patronymic) -> str | None:
     driver.get(url)
     time.sleep(0.8)
     inp = driver.find_element(By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/div[1]/div/app-bankrupt-form/div/form/app-form-search-string/div/form/div/div/el-input/div/div/div/input')

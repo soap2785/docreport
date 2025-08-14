@@ -15,7 +15,7 @@ driver = webdriver.Chrome(options=chrome_options)
 url = "https://fedsfm.ru/documents/terrorists-catalog-portal-add"
 
 
-def terrorist(surname, name, patronymic):
+def terrorist(surname, name, patronymic) -> str:
     driver.get(url)
 
     pass_warning = driver.find_element(By.XPATH, '//*[@id="details-button"]')

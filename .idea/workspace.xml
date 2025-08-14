@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="232f71b6-4c9f-4d75-b621-6e45688962e7" name="Changes" comment="modded civil_service.py, iss_ip.py">
+    <list default="true" id="232f71b6-4c9f-4d75-b621-6e45688962e7" name="Changes" comment="modded civil_service.py, bankrupts.py">
+      <change afterPath="$PROJECT_DIR$/business_logic/parsers/criminal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/FNS.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/FNS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/INN.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/INN.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/iss_ip.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/iss_ip.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/suspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/suspect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/urlForParsers.txt" beforeDir="false" afterPath="$PROJECT_DIR$/urlForParsers.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,25 +50,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python.FNS.executor&quot;: &quot;Run&quot;,
-    &quot;Python.bankrot.executor&quot;: &quot;Run&quot;,
-    &quot;Python.bankrupts.executor&quot;: &quot;Run&quot;,
-    &quot;Python.civil_service.executor&quot;: &quot;Run&quot;,
-    &quot;Python.civil_sservice.executor&quot;: &quot;Run&quot;,
-    &quot;Python.iss_ip.executor&quot;: &quot;Run&quot;,
-    &quot;Python.kad_arbitr.executor&quot;: &quot;Run&quot;,
-    &quot;Python.terrorist.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Game/PycharmProjects/docreport&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python.FNS.executor": "Run",
+    "Python.bankrot.executor": "Run",
+    "Python.bankrupts.executor": "Run",
+    "Python.civil_service.executor": "Run",
+    "Python.civil_sservice.executor": "Run",
+    "Python.criminal.executor": "Run",
+    "Python.iss_ip.executor": "Run",
+    "Python.kad_arbitr.executor": "Run",
+    "Python.terrorist.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Game/PycharmProjects/docreport"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Game\PycharmProjects\docreport" />
@@ -76,7 +80,7 @@
       <recent name="C:\Users\Game\PycharmProjects\docreport\parsers\parsers" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.FNS">
+  <component name="RunManager" selected="Python.criminal">
     <configuration name="FNS" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="docreport" />
       <option name="ENV_FILES" value="" />
@@ -143,6 +147,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="criminal" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="docreport" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/business_logic/parsers" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/business_logic/parsers/criminal.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="iss_ip" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="docreport" />
       <option name="ENV_FILES" value="" />
@@ -189,6 +215,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.criminal" />
       <item itemvalue="Python.civil_service" />
       <item itemvalue="Python.FNS" />
       <item itemvalue="Python.iss_ip" />
@@ -267,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755181751914</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="modded civil_service.py, bankrupts.py">
+      <option name="closed" value="true" />
+      <created>1755184750873</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1755184750873</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -300,6 +335,7 @@
     <MESSAGE value="added array of files with URLs and their statuses" />
     <MESSAGE value="modded terrorist.py" />
     <MESSAGE value="modded civil_service.py, iss_ip.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="modded civil_service.py, iss_ip.py" />
+    <MESSAGE value="modded civil_service.py, bankrupts.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="modded civil_service.py, bankrupts.py" />
   </component>
 </project>
