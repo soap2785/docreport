@@ -1,10 +1,15 @@
 import time
+from bs4 import BeautifulSoup
 
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
+from captcha import solve_captcha
 from config import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
@@ -15,27 +20,57 @@ chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64
 driver = webdriver.Chrome(options=chrome_options)
 url = 'https://egrul.nalog.ru/index.html'
 
-def suggest_fsn(inn, surname, name, patronymic):
+
+def captcha_for_egrul():
+    try:
+        WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="uniDialogContainer"]')))
+        iframe = driver.find_element(By.ID, "uniDialogFrame")
+        driver.switch_to.frame(iframe)
+        element_inside_iframe = driver.find_element(By.XPATH, '//*[@id="dialogContent"]/div/div/div/div/img')
+        img_source = element_inside_iframe.get_attribute('src')
+        solved = solve_captcha(img_source)
+        inp = driver.find_element(By.XPATH, '//*[@id="captcha"]')
+        inp.send_keys(solved)
+        inp.send_keys(Keys.ENTER)
+        driver.switch_to.default_content()
+        WebDriverWait(driver, 3).until(EC.invisibility_of_element_located((By.XPATH, '//*[@id="uniDialogContainer"]')))
+        print(101)
+    except TimeoutException:
+        pass
+
+
+def suggest_fsn(inn, surname, name, patronymic) -> str | None:
     driver.get(url)
+
     inp = driver.find_element(By.XPATH, '//*[@id="query"]')
     inp.send_keys(inn)
     inp.send_keys(Keys.ENTER)
-    time.sleep(1)
     try:
-        nothing_result = driver.find_element(By.XPATH, '//*[@id="noDataFound"]/div/div/p')
-        for x in inn:
-            inp.send_keys(Keys.BACKSPACE)
-        inp.send_keys(surname + ' ' + name + ' ' + patronymic)
-        inp.send_keys(Keys.ENTER)
-        time.sleep(1)
-        try:
-            nothing_result = driver.find_element(By.XPATH, '//*[@id="noDataFound"]/div/div/p')
-            return "Человека нету в базе данных"
-        except:
-            ...
+        captcha_for_egrul()
     except:
-        ...
+        pass
+    WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
+    time.sleep(0.3)
+    try:
+        WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
+        pass
 
+    except TimeoutException:
+        return "Человек есть в базе данных"
 
-if __name__ == "__main__":
-    print(suggest_fsn('490018495', 'a', 'a', 'a'))
+    inp.send_keys(Keys.CONTROL, 'a')
+    inp.send_keys(surname + ' ' + name + ' ' + patronymic)
+
+    checkbox = driver.find_element(By.XPATH, '//*[@id="unichk_0"]')
+    checkbox.click()
+
+    inp.send_keys(Keys.ENTER)
+    try:
+        captcha_for_egrul()
+    except:
+        pass
+    try:
+        WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="resultContent"]')))
+        return "Человек есть в базе данных"
+    except TimeoutException or NoSuchElementException:
+        return "Человека нет в базе данных"
