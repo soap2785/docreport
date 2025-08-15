@@ -2,7 +2,7 @@ import requests
 
 from config import proxies
 
-def suggest_inn(surname, name, patronymic, birthdate, docnumber, docdate) -> dict:
+def suggestInn(surname, name, patronymic, birthdate, docnumber, docdate) -> dict:
     url = "https://service.nalog.ru/inn-proc.do"
     data = {
         "fam": surname,

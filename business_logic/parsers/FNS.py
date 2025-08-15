@@ -8,26 +8,26 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from captcha import solve_captcha
+from captcha import solveCaptcha
 from config import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
-chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
 driver = webdriver.Chrome(options=chrome_options)
 url = 'https://egrul.nalog.ru/index.html'
 
 
-def captcha_for_egrul():
+def captchaForEgrul():
     try:
         WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="uniDialogContainer"]')))
         iframe = driver.find_element(By.ID, "uniDialogFrame")
         driver.switch_to.frame(iframe)
-        element_inside_iframe = driver.find_element(By.XPATH, '//*[@id="dialogContent"]/div/div/div/div/img')
-        img_source = element_inside_iframe.get_attribute('src')
-        solved = solve_captcha(img_source)
+        elementInsideIframe = driver.find_element(By.XPATH, '//*[@id="dialogContent"]/div/div/div/div/img')
+        imgSource = elementInsideIframe.get_attribute('src')
+        solved = solveCaptcha(imgSource)
         inp = driver.find_element(By.XPATH, '//*[@id="captcha"]')
         inp.send_keys(solved)
         inp.send_keys(Keys.ENTER)
@@ -38,18 +38,20 @@ def captcha_for_egrul():
         pass
 
 
-def suggest_fsn(inn, surname, name, patronymic) -> str | None:
+def suggestFSN(inn, surname, name, patronymic) -> str | None:
     driver.get(url)
 
     inp = driver.find_element(By.XPATH, '//*[@id="query"]')
-    inp.send_keys(inn)
-    inp.send_keys(Keys.ENTER)
+    inp.send_keys(inn, Keys.ENTER)
+
     try:
-        captcha_for_egrul()
+        captchaForEgrul()
     except:
         pass
+
     WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
     time.sleep(0.3)
+
     try:
         WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
         pass
@@ -57,17 +59,16 @@ def suggest_fsn(inn, surname, name, patronymic) -> str | None:
     except TimeoutException:
         return "Человек есть в базе данных"
 
-    inp.send_keys(Keys.CONTROL, 'a')
-    inp.send_keys(surname + ' ' + name + ' ' + patronymic)
-
     checkbox = driver.find_element(By.XPATH, '//*[@id="unichk_0"]')
     checkbox.click()
 
-    inp.send_keys(Keys.ENTER)
+    inp.send_keys(Keys.CONTROL, 'a', surname + ' ' + name + ' ' + patronymic, Keys.ENTER)
+
     try:
-        captcha_for_egrul()
+        captchaForEgrul()
     except:
         pass
+
     try:
         WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="resultContent"]')))
         return "Человек есть в базе данных"

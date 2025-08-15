@@ -16,22 +16,20 @@ url = 'https://fsin.gov.ru/criminal/'
 
 def criminal(region, surname, name, patronymic):
     driver.get(url)
-    cookies = driver.find_element(By.XPATH, '//*[@id="cookiesBtn"]')
-    cookies.click()
-    inp_region = driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[5]/div/form/div[1]/div/div[2]/div/div[1]/div')
-    inp_region.click()
-    dropdown_list = driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[5]/div/form/div[1]/div/div[2]/div/div[2]/div/div/ul')
-    target_elements = dropdown_list.find_elements(By.TAG_NAME, "li")
-    for target_element in target_elements:
+    driver.find_element(By.XPATH, '//*[@id="cookiesBtn"]').click()
+    driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[5]/div/form/div[1]/div/div[2]/div/div[1]/div').click()
+    targetElements = driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[5]/div/form/div[1]/div/div[2]/div/div[2]/div/div/ul').find_elements(By.TAG_NAME, "li")
+
+    for target_element in targetElements:
         if target_element.text == region + ' (УФСИН)':
             driver.execute_script("arguments[0].scrollIntoView();", target_element)
             target_element.click()
             break
-    inp_fullname = driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[5]/div/form/div[2]/div[1]/div[2]/div/input')
-    inp_fullname.send_keys(surname + ' ' + name + ' ' + patronymic, Keys.ENTER)
+
+    driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[5]/div/form/div[2]/div[1]/div[2]/div/input').send_keys(surname + ' ' + name + ' ' + patronymic, Keys.ENTER)
+
     try:
-        orientations_array = driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[6]')
-        orientations = orientations_array.find_elements(By.CLASS_NAME, 'sl-item')
+        driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[6]').find_elements(By.CLASS_NAME, 'sl-item')
         return "Человек присутствует в базе"
     except:
         return "Человека нет в базе данных"

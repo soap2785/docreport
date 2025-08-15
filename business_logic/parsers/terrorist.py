@@ -18,10 +18,10 @@ url = "https://fedsfm.ru/documents/terrorists-catalog-portal-add"
 def terrorist(surname, name, patronymic) -> str:
     driver.get(url)
 
-    pass_warning = driver.find_element(By.XPATH, '//*[@id="details-button"]')
-    pass_warning.click()
-    pass_warning = driver.find_element(By.XPATH, '//*[@id="proceed-link"]')
-    pass_warning.click()
+    passWarning = driver.find_element(By.XPATH, '//*[@id="details-button"]')
+    passWarning.click()
+    passWarning = driver.find_element(By.XPATH, '//*[@id="proceed-link"]')
+    passWarning.click()
 
     TableTwoOpen = driver.find_element(By.XPATH, '//*[@id="bodyContent"]/div/div/div/div/div/div[1]/div/div[1]/h4/a')
     TableTwoOpen.click()
@@ -36,7 +36,6 @@ def terrorist(surname, name, patronymic) -> str:
     for String in StringsInTable:
         FIO = String.text.split()
         terrorists.append(FIO[1] + ' ' + FIO[2] + ' ' + FIO[3].replace('*', '').replace(',', ''))
-    print(terrorists)
     if surname + " " + name + " " + patronymic in terrorists:
         return "Человек в базе террористов присутствует"
     else:

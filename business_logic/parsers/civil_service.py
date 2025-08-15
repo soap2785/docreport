@@ -16,8 +16,9 @@ chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64
 driver = webdriver.Chrome(options=chrome_options)
 
 
-def check_civserv(surname, name, patronymic) -> list | str:
+def checkCivserv(surname, name, patronymic) -> list | str:
     url = f'https://gossluzhba.gov.ru/reestr?filters=%7B"fullName":"{surname}%20{name}%20{patronymic}"%7D&page=1'
+
     if surname == ' ' and name == ' ' and patronymic == ' ':
         url = 'https://gossluzhba.gov.ru/reestr?filters=%7B"fullName":null%7D&page=1'
 
@@ -25,17 +26,20 @@ def check_civserv(surname, name, patronymic) -> list | str:
         driver.get(url)
         time.sleep(2)
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'table.text-center.table-hover.text-xs.line-height-xs')))
-
         table = driver.find_element(By.XPATH, '/html/body/app-root/div/section[4]/app-trust-loss-dismissal-records-list/div/app-trust-loss-dismissal-records-table/app-loader/div/div/table/tbody')
         linesOfTable = table.find_elements(By.TAG_NAME, 'tr')
-        list_abs = []
+        listAbs = []
+
         for iteration_number, nothing_matters in enumerate(linesOfTable):
-            list_temp = []
+            listTemp = []
             columnsOfLine = linesOfTable[iteration_number].find_elements(By.TAG_NAME, 'td')
+
             for column in (2, 3, 4, 5, 6):
-                list_temp.append(columnsOfLine[column].text)
-            list_abs.append(list_temp)
-        return list_abs
+                listTemp.append(columnsOfLine[column].text)
+
+            listAbs.append(listTemp)
+
+        return listAbs
 
     except Exception as e:
         return f"Ошибка: {e}"
