@@ -2,10 +2,12 @@
 import uuid
 from yookassa import Configuration, Payment
 
-from database.command_to_db import set_id_order
+from mainDIR.config import yooPayAccountId, yooPaySecretKey
 
-Configuration.account_id = '294785'
-Configuration.secret_key = 'live_vZqtsQ7vFu97dm9C9St9xEOH0d_YY7NaURuhCAB7qCY'
+from command_to_db import set_id_order
+
+Configuration.account_id = yooPayAccountId
+Configuration.secret_key = yooPayAccountId
 
 
 

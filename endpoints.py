@@ -3,7 +3,7 @@ import pathlib
 import re
 from datetime import datetime
 from datetime import date
-from config import regions, auth
+from oldconfig import regions, auth, mail
 from flask import jsonify, request, app, render_template, send_from_directory
 from werkzeug.security import check_password_hash
 from flask_mail import Message

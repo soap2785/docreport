@@ -8,8 +8,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from captcha import solveCaptcha
-from config import proxies
+from business_logic.parsers.captcha.captcha import solveCaptcha
+from oldconfig import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -29,7 +29,7 @@ def captchaForEgrul():
         imgSource = elementInsideIframe.get_attribute('src')
         solved = solveCaptcha(imgSource)
         inp = driver.find_element(By.XPATH, '//*[@id="captcha"]')
-        inp.send_keys(solved)
+        inp.send_keys(solved.get('code'))
         inp.send_keys(Keys.ENTER)
         driver.switch_to.default_content()
         WebDriverWait(driver, 3).until(EC.invisibility_of_element_located((By.XPATH, '//*[@id="uniDialogContainer"]')))
@@ -38,8 +38,12 @@ def captchaForEgrul():
         pass
 
 
-def suggestFSN(inn, surname, name, patronymic) -> str | None:
+def suggestFNS(inn, fullname) -> str | None:
     driver.get(url)
+    fullname = fullname.split()
+    surname = fullname[0]
+    name = fullname[1]
+    patronymic = fullname[2]
 
     inp = driver.find_element(By.XPATH, '//*[@id="query"]')
     inp.send_keys(inn, Keys.ENTER)
@@ -61,6 +65,7 @@ def suggestFSN(inn, surname, name, patronymic) -> str | None:
 
     checkbox = driver.find_element(By.XPATH, '//*[@id="unichk_0"]')
     checkbox.click()
+    fullname = fullname.split()
 
     inp.send_keys(Keys.CONTROL, 'a', surname + ' ' + name + ' ' + patronymic, Keys.ENTER)
 

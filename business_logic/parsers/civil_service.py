@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from config import proxies
+from oldconfig import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -16,7 +16,12 @@ chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64
 driver = webdriver.Chrome(options=chrome_options)
 
 
-def checkCivserv(surname, name, patronymic) -> list | str:
+def checkCivserv(fullname) -> list | str:
+    fullname = fullname.split()
+    surname = fullname[0]
+    name = fullname[1]
+    patronymic = fullname[2]
+
     url = f'https://gossluzhba.gov.ru/reestr?filters=%7B"fullName":"{surname}%20{name}%20{patronymic}"%7D&page=1'
 
     if surname == ' ' and name == ' ' and patronymic == ' ':

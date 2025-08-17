@@ -5,8 +5,8 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from business_logic.parsers.captcha import solveCaptcha
-from config import proxies
+from business_logic.parsers.captcha.captcha import solveCaptcha
+from oldconfig import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -18,7 +18,12 @@ url = 'https://fssp.gov.ru/iss/ip'
 wd = WebDriverWait(driver, 10)
 
 
-def iss_ip(region, surname, name, patronymic, birthdate) -> list | str:
+def iss_ip(region, fullname, birthdate) -> list | str:
+    fullname = fullname.split()
+    surname = fullname[0]
+    name = fullname[1]
+    patronymic = fullname[2]
+
     try:
         driver.get(url)
 

@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 
-from config import proxies
+from oldconfig import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -15,7 +15,11 @@ driver = webdriver.Chrome(options=chrome_options)
 url = "https://fedsfm.ru/documents/terrorists-catalog-portal-add"
 
 
-def terrorist(surname, name, patronymic) -> str:
+def terroristCheck(fullname) -> str:
+    fullname = fullname.split()
+    surname = fullname[0]
+    name = fullname[1]
+    patronymic = fullname[2]
     driver.get(url)
 
     passWarning = driver.find_element(By.XPATH, '//*[@id="details-button"]')

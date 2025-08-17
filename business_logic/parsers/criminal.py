@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-from config import proxies
+from oldconfig import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -14,7 +14,12 @@ driver = webdriver.Chrome(options=chrome_options)
 url = 'https://fsin.gov.ru/criminal/'
 
 
-def criminal(region, surname, name, patronymic):
+def criminal(region, fullname):
+    fullname = fullname.split()
+    surname = fullname[0]
+    name = fullname[1]
+    patronymic = fullname[2]
+
     driver.get(url)
     driver.find_element(By.XPATH, '//*[@id="cookiesBtn"]').click()
     driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[5]/div/form/div[1]/div/div[2]/div/div[1]/div').click()

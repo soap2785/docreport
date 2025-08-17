@@ -11,9 +11,9 @@ def solveCaptcha(url) -> dict:
     header, encodedData = url.split(",", 1)
     imageData = base64.b64decode(encodedData)
 
-    with open("captcha.jpeg", "wb") as f:
+    with open("../captcha.png", "wb") as f:
         f.write(imageData)
 
-    result = solver.normal('captcha.jpeg')
+    result = solver.normal('captcha.png')
 
     return result

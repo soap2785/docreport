@@ -1,4 +1,4 @@
-from config import app, IP_site, PORT_site
+from oldconfig import app, IP_site, PORT_site
 
 
 if __name__ == "__main__":
