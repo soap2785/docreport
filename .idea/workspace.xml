@@ -6,26 +6,31 @@
   <component name="ChangeListManager">
     <list default="true" id="232f71b6-4c9f-4d75-b621-6e45688962e7" name="Changes" comment="modded FNS">
       <change afterPath="$PROJECT_DIR$/mainDIR/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/endpointsForBot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/mainTGBot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/retryHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/PDFReportGenerationReference.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/Отчет 2.docx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/FNS.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/FNS.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/INN.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/INN.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/captcha.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha/__init__.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/criminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/criminal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/iss_ip.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/issIp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/issIp.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/issIp.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/suspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/suspect.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/wanted.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/wanted.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/oldconfig.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/endpoints.py" beforeDir="false" afterPath="$PROJECT_DIR$/endpoints.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.cfg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/endpoints.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/endpointsForBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/endpointsForBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/mainTGBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compilator.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/compilator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/retryHandler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/oldconfig.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yoo_pay.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,6 +84,7 @@
     &quot;Python.criminal.executor&quot;: &quot;Run&quot;,
     &quot;Python.iss_ip.executor&quot;: &quot;Run&quot;,
     &quot;Python.kad_arbitr.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.mainTGBot.executor&quot;: &quot;Run&quot;,
     &quot;Python.main_tg_bot.executor&quot;: &quot;Run&quot;,
     &quot;Python.terrorist.executor&quot;: &quot;Run&quot;,
@@ -88,23 +94,27 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Game/PycharmProjects/docreport/forgitignore&quot;
+    &quot;last_opened_file_path&quot;: &quot;/home/desktop/PycharmProjects/docreport/mainDIR/processes&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;proofread&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Game\PycharmProjects\docreport\forgitignore" />
-      <recent name="C:\Users\Game\PycharmProjects\docreport" />
+      <recent name="$PROJECT_DIR$/mainDIR/processes" />
+      <recent name="$PROJECT_DIR$/mainDIR" />
+      <recent name="$PROJECT_DIR$/mainDIR/misc/Payment" />
+      <recent name="$PROJECT_DIR$/mainDIR/templates" />
+      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mainDIR/processes/payment/referencesTEMP" />
+      <recent name="$PROJECT_DIR$/mainDIR/processes/payment" />
       <recent name="$PROJECT_DIR$/mainDIR" />
-      <recent name="C:\Users\Game\PycharmProjects\docreport\forgitignore" />
-      <recent name="C:\Users\Game\PycharmProjects\docreport\business_logic\parsers" />
-      <recent name="C:\Users\Game\PycharmProjects\docreport\business_logic\parsers\captcha" />
-      <recent name="C:\Users\Game\PycharmProjects\docreport\parsers\parsers" />
+      <recent name="$PROJECT_DIR$/mainDIR/misc/Payment" />
+      <recent name="$PROJECT_DIR$/mainDIR/processes" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.mainTGBot">
+  <component name="RunManager" selected="Python.main">
     <configuration name="FNS" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="docreport" />
       <option name="ENV_FILES" value="" />
@@ -215,6 +225,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="docreport" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mainDIR" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mainDIR/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="mainTGBot" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="docreport" />
       <option name="ENV_FILES" value="" />
@@ -260,13 +292,14 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.mainTGBot" />
-      <item itemvalue="Python.criminal" />
-      <item itemvalue="Python.civil_service" />
       <item itemvalue="Python.FNS" />
-      <item itemvalue="Python.issIp" />
-      <item itemvalue="Python.terrorist" />
       <item itemvalue="Python.bankrupts" />
+      <item itemvalue="Python.civil_service" />
+      <item itemvalue="Python.criminal" />
+      <item itemvalue="Python.issIp" />
+      <item itemvalue="Python.mainTGBot" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.terrorist" />
     </list>
   </component>
   <component name="SharedIndexes">

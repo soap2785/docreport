@@ -1,12 +1,13 @@
 import requests
 
-from oldconfig import proxies
+from mainDIR.config import proxies
 
 def suggestInn(fullname, birthdate, docnumber, docdate) -> dict:
     fullname = fullname.split()
     surname = fullname[0]
     name = fullname[1]
     patronymic = fullname[2]
+    print(surname, name, patronymic, 'adiawdiadawkdkasdkawdkaiwdiawkd')
     url = "https://service.nalog.ru/inn-proc.do"
     data = {
         "fam": surname,

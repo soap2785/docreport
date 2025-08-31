@@ -5,7 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 
-from oldconfig import proxies
+from mainDIR.config import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -15,7 +15,7 @@ chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64
 driver = webdriver.Chrome(options=chrome_options)
 url = "https://r49.fssp.gov.ru/iss/suspect_info"
 
-def check_suspect(fullname):
+def checkSuspect(fullname):
     driver.get(url)
     driver.find_element(By.XPATH, '//*[@id="app"]/div/div/div/div[1]/div[2]/div[2]/div/div/div/div[4]/div/div/'
                                   'div/div/div/div/div/div/div/div/div/div/div/div/div/div/div/div[1]/div/div[1]/div/'
