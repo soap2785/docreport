@@ -16,7 +16,7 @@ chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64
 driver = webdriver.Chrome(options=chrome_options)
 
 
-def checkCivserv(fullname) -> list | str:
+async def checkCivserv(fullname) -> list | str:
     fullname = fullname.split()
     surname = fullname[0]
     name = fullname[1]
@@ -46,5 +46,5 @@ def checkCivserv(fullname) -> list | str:
 
         return listAbs
 
-    except Exception as e:
-        return f"Ошибка: {e}"
+    except IndexError:
+        return "Человека нет в базе данных"

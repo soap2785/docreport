@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -21,7 +22,10 @@ def criminal(region, fullname):
     patronymic = fullname[2]
 
     driver.get(url)
-    driver.find_element(By.XPATH, '//*[@id="cookiesBtn"]').click()
+    try:
+        driver.find_element(By.XPATH, '//*[@id="cookiesBtn"]').click()
+    except NoSuchElementException:
+        pass
     driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[5]/div/form/div[1]/div/div[2]/div/div[1]/div').click()
     targetElements = driver.find_element(By.XPATH, '/html/body/div[3]/div[1]/div[2]/div[1]/div/div/div[5]/div/form/div[1]/div/div[2]/div/div[2]/div/div/ul').find_elements(By.TAG_NAME, "li")
 

@@ -1,4 +1,7 @@
+import datetime
+
 from selenium import webdriver
+from selenium.common import NoSuchElementException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
@@ -18,7 +21,7 @@ url = 'https://fssp.gov.ru/iss/ip'
 wd = WebDriverWait(driver, 10)
 
 
-def iss_ip(region, fullname, birthdate) -> list | str:
+async def iss_ip(region, fullname, birthdate) -> list | str:
     fullname = fullname.split()
     surname = fullname[0]
     name = fullname[1]
@@ -35,11 +38,13 @@ def iss_ip(region, fullname, birthdate) -> list | str:
         wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="input01"]'))).send_keys(surname)
         wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="input02"]'))).send_keys(name)
         wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="input05"]'))).send_keys(patronymic)
+        birthdate = datetime.datetime.strptime(birthdate, "%Y-%m-%d %H:%M:%S")
+        birthdate = datetime.datetime.strftime(birthdate, "%d.%m.%Y")
         wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="input06"]'))).send_keys(birthdate)
-        wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="btn-sbm"]'))).click()
         driver.find_element(By.XPATH, '//*[@id="app"]/main').click()
+        wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="btn-sbm"]'))).click()
 
-        wd.until(EC.visibility_of_element_located((By.XPATH, '/html/body/div[5]/div[1]/div[2]')))
+        wd.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="capchaVisual"]')))
         image = driver.find_element(By.XPATH, '//*[@id="capchaVisual"]')
         solve = solveCaptcha(image.get_attribute("src")).get('code')
         driver.find_element(By.XPATH, '//*[@id="captcha-popup-code"]').send_keys(solve, Keys.ENTER)
@@ -54,10 +59,15 @@ def iss_ip(region, fullname, birthdate) -> list | str:
                 for index, td in enumerate(tds):
                     if index not in (0, 3, 4, 7):
                         dataCur.append(td.text)
-                dataAbs.append(dataCur)
+                if dataCur:
+                    dataAbs.append(dataCur)
             return dataAbs
-        except:
-            return 'Ничего не найдено'
+        except NoSuchElementException:
+            return 'Ничего не найдено 101'
+
+    except Exception as e:
+        print(e)
+        return "Ничего не найдено 102"
 
     finally:
         driver.quit()

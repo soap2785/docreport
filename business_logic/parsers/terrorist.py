@@ -15,7 +15,7 @@ driver = webdriver.Chrome(options=chrome_options)
 url = "https://fedsfm.ru/documents/terrorists-catalog-portal-add"
 
 
-def terroristCheck(fullname) -> str:
+async def terroristCheck(fullname) -> str:
     fullname = fullname.split()
     surname = fullname[0]
     name = fullname[1]
@@ -37,6 +37,7 @@ def terroristCheck(fullname) -> str:
     table = driver.find_element(By.XPATH, '//*[@id="russianFL"]/div/ol')
     StringsInTable = table.find_elements(By.TAG_NAME, 'li')
     terrorists = []
+    time.sleep(3)
     for String in StringsInTable:
         FIO = String.text.split()
         terrorists.append(FIO[1] + ' ' + FIO[2] + ' ' + FIO[3].replace('*', '').replace(',', ''))

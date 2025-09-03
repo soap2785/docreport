@@ -1,46 +1,31 @@
+import datetime
 from sqlite3 import connect
 
-from business_logic.parsers.INN import suggestInn
-from business_logic.parsers.FNS import suggestFNS
-from business_logic.parsers.bankrupts import bankrupt
-from business_logic.parsers.issIp import iss_ip
-from business_logic.parsers.terrorist import terroristCheck
-from business_logic.parsers.civil_service import checkCivserv
-from business_logic.parsers.criminal import criminal
-from mainDIR.config import bot
+from mainDIR.processes.generateDOCXReportFile import generateDOCXReport
+from mainDIR.processes.generatePDFReportFile import generatePDFReport
 
 
-async def compilation(dt: dict, tgID: int):
-    fullname = dt.get(tgID).get('fullname')
-    region = dt.get(tgID).get('region')
-    birthdate = dt.get(tgID).get('birthdate')
-    passport = dt.get(tgID).get('passport')
-    passportDate = dt.get(tgID).get('passportDate')
+async def compilation(dt: dict, tgID: int, messageChatId: int) -> tuple:
+    fullname: str = dt.get(tgID).get('fullname')
+    region: str = dt.get(tgID).get('region')
+    birthdate: datetime.date = dt.get(tgID).get('birthdate')
+    passport: str = dt.get(tgID).get('passport')
+    passportDate: datetime.date = dt.get(tgID).get('passportDate')
 
     with connect('database.db') as conn:
+        curTime = datetime.datetime.now()
         conn.cursor().execute(
-            "INSERT INTO orders (fullname, region, birthdate, passport, passportDate) VALUES (?, ?, ?, ?, ?)",
-            (fullname, region, birthdate, passport, passportDate))
+            "INSERT INTO orders (fullname, region, birthdate, passport, passportDate, curTime, messageChatId) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (fullname, region, birthdate, passport, passportDate, curTime, messageChatId))
         conn.commit()
 
+    with connect('database.db') as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT id FROM orders WHERE curTime = ?", (curTime,))
+        result = cur.fetchall()
+
+    returnedPDF = await generatePDFReport(fullname, region, birthdate, passport, passportDate, result[0])
+    returnedDOCX = await generateDOCXReport(returnedPDF[1], result[0], fullname, region, birthdate, passport, passportDate)
+    return returnedPDF, returnedDOCX
 
 
-
-async def compilate(fullname, region, birthdate, passport, passportDate) -> dict:
-    getINN = suggestInn(fullname, birthdate, passport, passportDate)
-    getFNS = suggestFNS(getINN, fullname)
-    getTerrorist = terroristCheck(fullname)
-    getCivServ = checkCivserv(fullname)
-    getCriminal = criminal(region, fullname)
-    getBankrupts = bankrupt(getINN, fullname)
-    getIssIp = iss_ip(region, fullname, birthdate)
-    compilatedDict = {
-        'https://service.nalog.ru/inn-proc.do': getINN,
-        'https://egrul.nalog.ru/index.html': getFNS,
-        'https://fedsfm.ru/documents/terrorists-catalog-portal-add': getTerrorist,
-        'https://gossluzhba.gov.ru/reestr?filters=%7B"fullName":null%7D&page=1': getCivServ,
-        'https://fsin.gov.ru/criminal/': getCriminal,
-        'https://bankrot.fedresurs.ru/bankrupts': getBankrupts,
-        'https://fssp.gov.ru/iss/ip': getIssIp
-    }
-    return compilatedDict

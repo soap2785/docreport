@@ -3,6 +3,8 @@ from sqlite3 import connect
 from aiogram.types import Message
 
 from mainDIR.config import admins, bot
+from mainDIR.processes.generateDOCXReportFile import generateDOCXReport
+from mainDIR.processes.generatePDFReportFile import generatePDFReport
 
 
 class TempStorage:
@@ -13,7 +15,10 @@ class TempStorage:
 
 async def admin(message: Message) -> None:
     if message.from_user.id in admins:
-        TempStorage.absID = 0
+        with connect('database.db') as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT * FROM orders ORDER BY id DESC")
+            TempStorage.absID = cur.fetchall()[0][0]
         with connect('database.db') as conn:
             cur = conn.cursor()
             cur.execute('SELECT * FROM orders ORDER BY id DESC')
@@ -33,7 +38,7 @@ async def admin(message: Message) -> None:
                 f'\nДата выдачи: {data[ID][5]}'
                 f'\nСостояние заказа: {orderState}'
                 f'\nID заказа: {data[ID][0]}'
-                '\n/next',
+                '\n/next | /retry',
                 # reply_markup = keyboard
                 chat_id = message.chat.id
             )
@@ -47,13 +52,13 @@ async def admin(message: Message) -> None:
 async def nextOrder(self, userMessage: Message) -> None:
     try:
         message = TempStorage.messageForDelete
-        TempStorage.absID += 1
+        TempStorage.absID -= 1
         ID = TempStorage.absID
         with connect('database.db') as conn:
             cur = conn.cursor()
-            cur.execute('SELECT * FROM orders ORDER BY id DESC')
+            cur.execute('SELECT * FROM orders WHERE id = ? ORDER BY id DESC', (ID,))
             data = cur.fetchall()
-        if data[ID - 1][6] is None or False:
+        if data[0][6] is None or False:
             orderState = 'Оплата ожидается'
         else:
             orderState = 'Оплачено'
@@ -65,14 +70,14 @@ async def nextOrder(self, userMessage: Message) -> None:
             message = await bot.edit_message_text(
                 text = 'Админка'
                 '\n\n'
-                f'\nФИО: {data[ID][1]}'
-                f'\nРегион: {data[ID][2]}'
-                f'\nДата рождения: {data[ID][3]}'
-                f'\nПаспорт: {data[ID][4]}'
-                f'\nДата выдачи: {data[ID][5]}'
+                f'\nФИО: {data[0][1]}'
+                f'\nРегион: {data[0][2]}'
+                f'\nДата рождения: {data[0][3]}'
+                f'\nПаспорт: {data[0][4]}'
+                f'\nДата выдачи: {data[0][5]}'
                 f'\nСостояние заказа: {orderState}'
-                f'\nID заказа: {data[ID][0]}'
-                '\n/next | /back',
+                f'\nID заказа: {data[0][0]}'
+                '\n/next | /retry | /back',
                 # reply_markup = keyboardWithBackButton,
                 chat_id = message.chat.id,
                 message_id = message.message_id
@@ -83,14 +88,14 @@ async def nextOrder(self, userMessage: Message) -> None:
             messageForDelete = await bot.edit_message_text(
                 text='Админка'
                      '\n\n'
-                     f'\nФИО: {data[ID][1]}'
-                     f'\nРегион: {data[ID][2]}'
-                     f'\nДата рождения: {data[ID][3]}'
-                     f'\nПаспорт: {data[ID][4]}'
-                     f'\nДата выдачи: {data[ID][5]}'
+                     f'\nФИО: {data[0][1]}'
+                     f'\nРегион: {data[0][2]}'
+                     f'\nДата рождения: {data[0][3]}'
+                     f'\nПаспорт: {data[0][4]}'
+                     f'\nДата выдачи: {data[0][5]}'
                      f'\nСостояние заказа: {orderState}'
-                     f'\nID заказа: {data[ID][0]}'
-                     '\n/back',
+                     f'\nID заказа: {data[0][0]}'
+                     '\n/back | /retry',
                 # reply_markup = keyboard,
                 chat_id=message.chat.id,
                 message_id=message.message_id
@@ -106,13 +111,13 @@ async def nextOrder(self, userMessage: Message) -> None:
 async def prevOrder(self, userMessage: Message) -> None:
     try:
         message = TempStorage.messageForDelete
-        TempStorage.absID -= 1
+        TempStorage.absID += 1
         with connect('database.db') as conn:
             cur = conn.cursor()
-            cur.execute('SELECT * FROM orders ORDER BY id DESC')
+            cur.execute('SELECT * FROM orders WHERE id = ? ORDER BY id DESC', (TempStorage.absID,))
             data = cur.fetchall()
         ID = TempStorage.absID
-        if data[ID][6] is None or False:
+        if data[0][6] is None or False:
             orderState = 'Оплата ожидается'
         else:
             orderState = 'Оплачено'
@@ -126,14 +131,14 @@ async def prevOrder(self, userMessage: Message) -> None:
             messageForDelete = await bot.edit_message_text(
                 text = 'Админка'
                 '\n\n'
-                f'\nФИО: {data[ID][1]}'
-                f'\nРегион: {data[ID][2]}'
-                f'\nДата рождения: {data[ID][3]}'
-                f'\nПаспорт: {data[ID][4]}'
-                f'\nДата выдачи: {data[ID][5]}'
+                f'\nФИО: {data[0][1]}'
+                f'\nРегион: {data[0][2]}'
+                f'\nДата рождения: {data[0][3]}'
+                f'\nПаспорт: {data[0][4]}'
+                f'\nДата выдачи: {data[0][5]}'
                 f'\nСостояние заказа: {orderState}'
-                f'\nID заказа: {data[ID][0]}'
-                '\n/next | /back',
+                f'\nID заказа: {data[0][0]}'
+                '\n/next | /retry | /back',
                 # reply_markup = keyboard,
                 chat_id = message.chat.id,
                 message_id = message.message_id
@@ -144,14 +149,14 @@ async def prevOrder(self, userMessage: Message) -> None:
             messageForDelete = await bot.edit_message_text(
                 text = 'Админка'
                 '\n\n'
-                f'\nФИО: {data[ID][1]}'
-                f'\nРегион: {data[ID][2]}'
-                f'\nДата рождения: {data[ID][3]}'
-                f'\nПаспорт: {data[ID][4]}'
-                f'\nДата выдачи: {data[ID][5]}'
+                f'\nФИО: {data[0][1]}'
+                f'\nРегион: {data[0][2]}'
+                f'\nДата рождения: {data[0][3]}'
+                f'\nПаспорт: {data[0][4]}'
+                f'\nДата выдачи: {data[0][5]}'
                 f'\nСостояние заказа: {orderState}'
-                f'\nID заказа: {data[ID][0]}'
-                '\n/next',
+                f'\nID заказа: {data[0][0]}'
+                '\n/next | /retry',
                 # reply_markup = keyboard,
                 chat_id = message.chat.id,
                 message_id = message.message_id
@@ -192,10 +197,23 @@ async def showByID(userMessage: Message) -> None:
              f'\nДата выдачи: {data[5]}'
              f'\nСостояние заказа: {orderState}'
              f'\nID заказа: {data[0]}'
-             '\n/next | /back',
+             '\n/next | /retry | /back',
         # reply_markup = keyboardWithBackButton,
         message_id = message.message_id,
         chat_id = message.chat.id
     )
     TempStorage.messageForDelete = messageForDelete
     return None
+
+
+async def retry(message: Message) -> None:
+    await bot.delete_message(message.chat.id, message.message_id)
+    with connect('database.db') as conn:
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM orders WHERE id = ?", (TempStorage.absID,))
+        result = cur.fetchall()
+        result = result[0]
+    returnedPDF = await generatePDFReport(result[1], result[2], result[3], result[4], result[5], TempStorage.absID)
+    returnedDOCX = await generateDOCXReport(returnedPDF[1], result[0], result[1], result[2], result[3], result[4], result[5])
+    await bot.send_document(result[8], returnedPDF[0])
+    await bot.send_document(result[8], returnedDOCX)

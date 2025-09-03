@@ -4,33 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="232f71b6-4c9f-4d75-b621-6e45688962e7" name="Changes" comment="modded FNS">
+    <list default="true" id="232f71b6-4c9f-4d75-b621-6e45688962e7" name="Changes" comment="commited whole files">
       <change afterPath="$PROJECT_DIR$/mainDIR/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/PDFReportGenerationReference.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/Отчет 2.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/compiling.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/generatePDFReportFile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pdf.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/FNS.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/FNS.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/INN.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/INN.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha/captcha.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/captcha/captcha.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/criminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/criminal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/issIp.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/issIp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/suspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/suspect.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/wanted.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/wanted.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.cfg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/endpoints.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/mainDIR/endpointsForBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/endpointsForBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/mainTGBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/PDFReportGenerationReference.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainDIR/processes/compilator.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/compilator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/retryHandler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/oldconfig.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yoo_pay.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/Отчет 2.docx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +48,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/soap2785/docreport.git&quot;,
-    &quot;accountId&quot;: &quot;8e70943a-d0a6-49c9-b868-dac40b194b25&quot;
+    &quot;accountId&quot;: &quot;e8094d14-119a-4605-8eb0-d3f3da6b51cf&quot;
   }
 }</component>
   <component name="HighlightingSettingsPerFile">
@@ -81,12 +75,14 @@
     &quot;Python.captcha.executor&quot;: &quot;Run&quot;,
     &quot;Python.civil_service.executor&quot;: &quot;Run&quot;,
     &quot;Python.civil_sservice.executor&quot;: &quot;Run&quot;,
+    &quot;Python.compilator.executor&quot;: &quot;Run&quot;,
     &quot;Python.criminal.executor&quot;: &quot;Run&quot;,
     &quot;Python.iss_ip.executor&quot;: &quot;Run&quot;,
     &quot;Python.kad_arbitr.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;Python.mainTGBot.executor&quot;: &quot;Run&quot;,
     &quot;Python.main_tg_bot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pdf.executor&quot;: &quot;Run&quot;,
     &quot;Python.terrorist.executor&quot;: &quot;Run&quot;,
     &quot;Python.wanted.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -94,8 +90,8 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/desktop/PycharmProjects/docreport/mainDIR/processes&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;proofread&quot;
+    &quot;last_opened_file_path&quot;: &quot;/home/desktop/Downloads/ru-6.5.0.12.jar&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;memory.settings&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -405,7 +401,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755286507245</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="commited whole files">
+      <option name="closed" value="true" />
+      <created>1756621791032</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1756621791032</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -442,6 +446,7 @@
     <MESSAGE value="modded whole files&#10;added criminal.py" />
     <MESSAGE value="modded FNS (working well, needs to test captcha)" />
     <MESSAGE value="modded FNS" />
-    <option name="LAST_COMMIT_MESSAGE" value="modded FNS" />
+    <MESSAGE value="commited whole files" />
+    <option name="LAST_COMMIT_MESSAGE" value="commited whole files" />
   </component>
 </project>

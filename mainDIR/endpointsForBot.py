@@ -7,9 +7,10 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
 from aiogram.types import Message # InlineKeyboardButton, InlineKeyboardMarkup
 
-from config import dp, regions
+from config import dp, regions, bot
 from processes.compilator import compilation
-from processes.admin import admin, admins, nextOrder, prevOrder, showByID
+from processes.admin import admin, admins, nextOrder, prevOrder, showByID, retry
+
 
 currentUser = {}
 mainRouter = Router()
@@ -68,8 +69,8 @@ async def prevOrderHandler(message: Message) -> None:
 
 
 @mainRouter.message(Command('retry'))
-async def retry() -> None:
-    ...
+async def retryHandler(message: Message) -> None:
+    await retry(message)
 
 
 @mainRouter.message(Command('show'))
@@ -82,7 +83,7 @@ async def commandStartHandler(message: Message, state: FSMContext) -> None:
     await state.set_state(Data.fullname)
     if message.from_user.id not in admins:
         await message.answer(Messages.Start.start)
-        currentUser.setdefault(message.from_user.id, {'fullname': None, 'region': None, 'birthdate': None, 'passport': None, 'passportDate': None})
+        currentUser.setdefault(message.from_user.id, {'fullname': str, 'region': str, 'birthdate': datetime, 'passport': str, 'passportDate': datetime})
 
 
 @mainRouter.message(F.text == 'admin')
@@ -90,15 +91,9 @@ async def adminHandler(message: Message):
     await admin(message)
 
 
-@mainRouter.message(Command('retry'))
-async def retryHandler() -> None:
-    await retry()
-    return
-
-
 @mainRouter.message(F.text, Data.fullname)
 async def processFullname(message: Message, state: FSMContext) -> None:
-    if message.text != 'admin' and "/" not in message.text:
+    if message.text != 'admin' and "/" and "skip" not in message.text:
         fullname = message.text.split()
 
         if len(fullname) == 3:
@@ -126,8 +121,7 @@ async def processRegion(message: Message, state: FSMContext) -> None:
 @mainRouter.message(Data.birthdate)
 async def processBirthdate(message: Message, state: FSMContext):
     try:
-        strptime(message.text, '%d.%m.%Y')
-        currentUser[message.from_user.id]['birthdate'] = message.text
+        currentUser[message.from_user.id]['birthdate'] = datetime.strptime(message.text, '%d.%m.%Y')
         await state.set_state(Data.passport)
         await message.answer(Messages.Birthdate.valid)
 
@@ -149,24 +143,26 @@ async def processPassport(message: Message, state: FSMContext):
             await state.set_state(Data.passport)
     except IndexError:
         await message.answer(Messages.Passport.Number.exception)
+        await state.set_state(Data.passport)
 
 
 @mainRouter.message(Data.passportDate)
 async def processPassportDate(message: Message, state: FSMContext):
     try:
-        passportDate = strptime(str(message.text), '%d.%m.%Y')
-        birthdate = strptime(currentUser.get(message.from_user.id).get('birthdate'), '%d.%m.%Y')
+        passportDate = strptime(message.text, '%d.%m.%Y')
+        birthdate = currentUser.get(message.from_user.id).get('birthdate')
         passportDateDatetime = datetime(*passportDate[:6])
-        birthdateDatetime = datetime(*birthdate[:6])
-        dates_diff = passportDateDatetime - birthdateDatetime
+        dates_diff = passportDateDatetime - birthdate
         age_in_days = dates_diff.days
-        age_in_years = age_in_days / 365.25
+        age_in_years = age_in_days / 365
         if age_in_years < 14:
             raise LessThan14Error
 
-        currentUser[message.from_user.id]['passportDate'] = message.text
-        await message.answer(Messages.Passport.Number.valid)
-        await compilation(currentUser, message.from_user.id)
+        currentUser[message.from_user.id]['passportDate'] = passportDateDatetime
+        await message.answer(Messages.Passport.Date.valid)
+        returned = await compilation(currentUser, message.from_user.id, message.chat.id)
+        await bot.send_document(message.chat.id, returned[0])
+        await bot.send_document(message.chat.id, returned[1])
 
     except LessThan14Error:
         await message.answer(Messages.Passport.Date.exceptionLessThan14)

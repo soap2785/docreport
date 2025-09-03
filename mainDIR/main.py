@@ -22,7 +22,9 @@ if __name__ == "__main__":
         birthdate DATE,
         passport TEXT,
         passportDate DATE,
-        state BOOLEAN
+        state BOOLEAN,
+        curTime DATETIME,
+        messageChatId INTEGER
         )
         """)
     asyncio.run(main())

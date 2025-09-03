@@ -38,44 +38,78 @@ def captchaForEgrul():
         pass
 
 
-def suggestFNS(inn, fullname) -> str | None:
-    driver.get(url)
-    fullname = fullname.split()
-    surname = fullname[0]
-    name = fullname[1]
-    patronymic = fullname[2]
-
-    inp = driver.find_element(By.XPATH, '//*[@id="query"]')
-    inp.send_keys(inn, Keys.ENTER)
-
+async def suggestFNS(inn, fullname) -> str | None:
     try:
-        captchaForEgrul()
-    except:
-        pass
+        driver.get(url)
+        if driver.find_element(By.XPATH, '//*[@id="uniPageSubtitle"]').text == 'Технологические работы':
+            return None
+        fullname = fullname.split()
+        surname = fullname[0]
+        name = fullname[1]
+        patronymic = fullname[2]
 
-    WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
-    time.sleep(0.3)
+        if inn:
 
-    try:
-        WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
-        pass
+            inp = driver.find_element(By.XPATH, '//*[@id="query"]')
+            inp.send_keys(inn, Keys.ENTER)
 
-    except TimeoutException:
-        return "Человек есть в базе данных"
+            try:
+                captchaForEgrul()
+            except:
+                pass
 
-    checkbox = driver.find_element(By.XPATH, '//*[@id="unichk_0"]')
-    checkbox.click()
-    fullname = fullname.split()
+            WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
+            time.sleep(0.3)
 
-    inp.send_keys(Keys.CONTROL, 'a', surname + ' ' + name + ' ' + patronymic, Keys.ENTER)
+            try:
+                WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
+                pass
 
-    try:
-        captchaForEgrul()
-    except:
-        pass
+            except TimeoutException:
+                return "Человек есть в базе данных"
 
-    try:
-        WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="resultContent"]')))
-        return "Человек есть в базе данных"
-    except TimeoutException or NoSuchElementException:
-        return "Человека нет в базе данных"
+            checkbox = driver.find_element(By.XPATH, '//*[@id="unichk_0"]')
+            checkbox.click()
+
+            inp.send_keys(Keys.CONTROL, 'a', surname + ' ' + name + ' ' + patronymic, Keys.ENTER)
+
+            try:
+                captchaForEgrul()
+            except:
+                pass
+
+            try:
+                WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="resultContent"]')))
+                return "Человек есть в базе данных"
+            except TimeoutException or NoSuchElementException:
+                return "Человека нет в базе данных"
+        else:
+            inp = driver.find_element(By.XPATH, '//*[@id="query"]')
+            WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
+            time.sleep(0.3)
+
+            try:
+                WebDriverWait(driver, 1).until(
+                    EC.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
+                pass
+
+            except TimeoutException:
+                return "Человек есть в базе данных"
+
+            checkbox = driver.find_element(By.XPATH, '//*[@id="unichk_0"]')
+            checkbox.click()
+
+            inp.send_keys(Keys.CONTROL, 'a', surname + ' ' + name + ' ' + patronymic, Keys.ENTER)
+
+            try:
+                captchaForEgrul()
+            except:
+                pass
+
+            try:
+                WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="resultContent"]')))
+                return "Человек есть в базе данных"
+            except TimeoutException or NoSuchElementException:
+                return "Человека нет в базе данных"
+    except NoSuchElementException:
+        return "На ресурсе технические работы"

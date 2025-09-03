@@ -17,7 +17,7 @@ url = 'https://bankrot.fedresurs.ru/bankrupts'
 wd = WebDriverWait(driver, 10)
 
 
-def bankrupt(inn, fullname) -> str | None:
+async def bankrupt(inn, fullname) -> str | None:
     fullname = fullname.split()
     surname = fullname[0]
     name = fullname[1]
