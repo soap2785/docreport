@@ -1,3 +1,5 @@
 urlForParsers.text
 mainDIR/config.py
 config.cfg
+/mainDIR/database.db
+/mainDIR/config.py
