@@ -10,13 +10,15 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 
 async def generateDOCXReport(
         result: dict,
-        ID: int,
+        ID: int | tuple,
         fullname: str,
         region: str,
         birthdate: datetime.date,
         passport: str,
         passportDate: datetime.date
 ) -> str:
+    if type(ID) is tuple:
+        ID = ID[0]
     fullnameForFilename = fullname.replace(' ', '-')
     filename = f"Report-{ID}-{fullnameForFilename}.docx"
 
@@ -48,7 +50,7 @@ async def generateDOCXReport(
     document.add_heading('Результаты проверок', level=2)
 
     if result.get('inn') and result.get('inn') != 'Информация об ИНН не найдена.' and result.get('inn') != '' and result.get('inn') != "Нет доступа к ресурсу":
-        document.add_paragraph(f"ИНН: {result.get('inn')}", style='Normal')
+        document.add_paragraph(f"ИНН: {result.get('inn').get('inn')}", style='Normal')
         document.add_paragraph(f"ФНС: {result.get('fns')}", style='Normal')
         document.add_paragraph(f"База террористов: {result.get('ter')}", style='Normal')
         document.add_paragraph(f"Госслужба: {result.get('civ')}", style='Normal')
@@ -74,6 +76,5 @@ async def generateDOCXReport(
         else:
             document.add_paragraph("Ничего не найдено", style='Normal')
 
-    print("docx")
     document.save(filename)
     return filename

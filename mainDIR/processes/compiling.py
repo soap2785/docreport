@@ -8,7 +8,7 @@ from business_logic.parsers.civil_service import checkCivserv
 
 async def compileData(fullname, region, birthdate, passport, passportDate) -> dict | None:
     try:
-        getINN = await suggestInnPOST(fullname, birthdate, passport, passportDate)
+        getINN = suggestInnPOST(fullname, birthdate, passport, passportDate)
         if getINN != 'Информация об ИНН не найдена.' and getINN != '' and getINN != "Нет доступа к ресурсу" and getINN.get('code') != 0:
             getFNS = await suggestFNS(getINN, fullname)
             getTerrorist = await terroristCheck(fullname)

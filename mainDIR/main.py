@@ -12,7 +12,6 @@ async def main():
 
 
 if __name__ == "__main__":
-    print("Бот запускается...")
     with connect('database.db') as conn:
         conn.cursor().execute("""
         CREATE TABLE IF NOT EXISTS orders (

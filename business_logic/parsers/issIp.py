@@ -38,8 +38,11 @@ async def iss_ip(region, fullname, birthdate) -> list | str:
         wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="input01"]'))).send_keys(surname)
         wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="input02"]'))).send_keys(name)
         wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="input05"]'))).send_keys(patronymic)
-        birthdate = datetime.datetime.strptime(birthdate, "%Y-%m-%d %H:%M:%S")
-        birthdate = datetime.datetime.strftime(birthdate, "%d.%m.%Y")
+        if type(birthdate) is not datetime.datetime:
+            birthdate = datetime.datetime.strptime(birthdate, "%Y-%m-%d %H:%M:%S")
+            birthdate = datetime.datetime.strftime(birthdate, "%d.%m.%Y")
+        else:
+            birthdate = datetime.datetime.strftime(birthdate, "%d.%m.%Y")
         wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="input06"]'))).send_keys(birthdate)
         driver.find_element(By.XPATH, '//*[@id="app"]/main').click()
         wd.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="btn-sbm"]'))).click()

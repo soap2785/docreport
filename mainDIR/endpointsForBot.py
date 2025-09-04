@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 from time import strptime
 
@@ -5,7 +6,7 @@ from aiogram import Router, F
 from aiogram.filters import CommandStart, Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import StatesGroup, State
-from aiogram.types import Message # InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import Message, FSInputFile  # InlineKeyboardButton, InlineKeyboardMarkup
 
 from config import dp, regions, bot
 from processes.compilator import compilation
@@ -161,12 +162,15 @@ async def processPassportDate(message: Message, state: FSMContext):
         currentUser[message.from_user.id]['passportDate'] = passportDateDatetime
         await message.answer(Messages.Passport.Date.valid)
         returned = await compilation(currentUser, message.from_user.id, message.chat.id)
-        await bot.send_document(message.chat.id, returned[0])
-        await bot.send_document(message.chat.id, returned[1])
+        await bot.send_document(message.chat.id, FSInputFile(returned[0][0]))
+        await bot.send_document(message.chat.id, FSInputFile(returned[1]))
+        os.remove(returned[0][0])
+        os.remove(returned[1])
 
     except LessThan14Error:
         await message.answer(Messages.Passport.Date.exceptionLessThan14)
         await state.set_state(Data.passportDate)
 
-    except ValueError:
+    except ValueError as e:
+        print(e)
         await message.answer(Messages.Passport.Date.exceptionTimeFormat)
