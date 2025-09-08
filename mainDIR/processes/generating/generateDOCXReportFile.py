@@ -1,26 +1,27 @@
-
+import asyncio
 import datetime
-from sqlite3 import connect
 
 from docx import Document
-from docx.shared import Inches
 from docx.shared import Pt
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 
+from mainDIR.processes.bot.classes import RequesterData
+
 
 async def generateDOCXReport(
-        result: dict,
         ID: int | tuple,
-        fullname: str,
-        region: str,
-        birthdate: datetime.date,
-        passport: str,
-        passportDate: datetime.date
+        CompiledData: dict
 ) -> str:
     if type(ID) is tuple:
         ID = ID[0]
-    fullnameForFilename = fullname.replace(' ', '-')
+    fullnameForFilename = RequesterData.fullname.replace(' ', '-')
     filename = f"Report-{ID}-{fullnameForFilename}.docx"
+
+    fullname = RequesterData.fullname
+    region = RequesterData.region
+    birthdate = RequesterData.birthdate
+    passport = RequesterData.passport
+    passportDate = RequesterData.passportDate
 
     document = Document()
 
@@ -37,9 +38,11 @@ async def generateDOCXReport(
     # Заголовок документа
     document.add_heading('Отчет', level=1)
     document.paragraphs[-1].alignment = WD_ALIGN_PARAGRAPH.CENTER
+    birthdate = datetime.datetime.strftime(birthdate, "%d.%m.%Y")
+    passportDate = datetime.datetime.strftime(passportDate, "%d.%m.%Y")
 
     # Информация о клиенте
-    document.add_heading('Информация о клиенте', level=2)
+    document.add_heading('Информация о запрашиваемом лице', level=2)
     document.add_paragraph(f"ФИО: {fullname}", style='Normal')
     document.add_paragraph(f"Регион: {region}", style='Normal')
     document.add_paragraph(f"Дата рождения: {birthdate}", style='Normal')
@@ -49,27 +52,27 @@ async def generateDOCXReport(
     # Результаты проверок
     document.add_heading('Результаты проверок', level=2)
 
-    if result.get('inn') and result.get('inn') != 'Информация об ИНН не найдена.' and result.get('inn') != '' and result.get('inn') != "Нет доступа к ресурсу":
-        document.add_paragraph(f"ИНН: {result.get('inn').get('inn')}", style='Normal')
-        document.add_paragraph(f"ФНС: {result.get('fns')}", style='Normal')
-        document.add_paragraph(f"База террористов: {result.get('ter')}", style='Normal')
-        document.add_paragraph(f"Госслужба: {result.get('civ')}", style='Normal')
-        document.add_paragraph(f"Банкротство: {result.get('bank')}", style='Normal')
+    if CompiledData.get('inn') and CompiledData.get('inn') != 'Информация об ИНН не найдена.' and CompiledData.get('inn') != '' and CompiledData.get('inn') != "Нет доступа к ресурсу":
+        document.add_paragraph(f"ИНН: {CompiledData.get('inn').get('inn')}", style='Normal')
+        document.add_paragraph(f"ФНС: {CompiledData.get('fns')}", style='Normal')
+        document.add_paragraph(f"База террористов: {CompiledData.get('ter')}", style='Normal')
+        document.add_paragraph(f"Госслужба: {CompiledData.get('civ')}", style='Normal')
+        document.add_paragraph(f"Банкротство: {CompiledData.get('bank')}", style='Normal')
         document.add_paragraph(f"Исполнительные производства:", style='Normal')
-        if result.get('iss') != "Ничего не найдено":
-            for row in result.get('iss'):
+        if CompiledData.get('iss') != "Ничего не найдено":
+            for row in CompiledData.get('iss'):
                 if row:
                     for line in row:
                         document.add_paragraph(line, style='Normal')
         else:
             document.add_paragraph("Ничего не найдено", style='Normal')
     else:
-        document.add_paragraph(f"ФНС: {result.get('fns')}", style='Normal')
-        document.add_paragraph(f"База террористов: {result.get('ter')}", style='Normal')
-        document.add_paragraph(f"Госслужба: {result.get('civ')}", style='Normal')
+        document.add_paragraph(f"ФНС: {CompiledData.get('fns')}", style='Normal')
+        document.add_paragraph(f"База террористов: {CompiledData.get('ter')}", style='Normal')
+        document.add_paragraph(f"Госслужба: {CompiledData.get('civ')}", style='Normal')
         document.add_paragraph(f"Исполнительные производства:", style='Normal')
-        if result.get('iss') != "Ничего не найдено":
-            for row in result.get('iss'):
+        if CompiledData.get('iss') != "Ничего не найдено":
+            for row in CompiledData.get('iss'):
                 if row:
                     for line in row:
                         document.add_paragraph(line, style='Normal')
@@ -77,4 +80,5 @@ async def generateDOCXReport(
             document.add_paragraph("Ничего не найдено", style='Normal')
 
     document.save(filename)
+    await asyncio.sleep(1)
     return filename

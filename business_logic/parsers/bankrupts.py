@@ -1,11 +1,12 @@
 from selenium import webdriver
+from selenium.common import NoSuchElementException, TimeoutException
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 
-from mainDIR.config import proxies
+from mainDIR.bot.config import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -18,46 +19,56 @@ wd = WebDriverWait(driver, 10)
 
 
 async def bankrupt(inn, fullname) -> str | None:
+    """
+    Возвращает состояние нахождения лица в базе банкротов
+
+    Args:
+        inn: ИНН лица (получается в suggestINNPost)
+        fullname: Полное ФИО интересующего лица
+    """
     fullname = fullname.split()
     surname = fullname[0]
     name = fullname[1]
     patronymic = fullname[2]
-
-    driver.get(url)
-    inp = wd.until(EC.visibility_of_element_located((By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/'
-                                                               'div[1]/div/app-bankrupt-form/div/form/'
-                                                               'app-form-search-string/div/form/div/div/el-input/div/'
-                                                               'div/div/input')))
-    inp.send_keys(inn, Keys.ENTER)
     try:
-        wd.until(EC.visibility_of_element_located((By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/'
-                                                             'div[2]/div/app-loader/div[1]/app-bankrupt-result/'
-                                                             'el-tab-panel/div[2]')))
-        individual = driver.find_element(By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/div[2]/'
-                                                   'div/app-loader/div[1]/app-bankrupt-result/el-tab-panel/div[1]/ul/'
-                                                   'li[2]/div/span[2]')
-        if int(individual.text) >= 1:
-            return "Человек в базе присутствует"
-
-        elif individual.text == '0':
-            return "Физлиц нет"
-    except:
-        for number in inn:
-            inp.send_keys(Keys.BACKSPACE)
+        driver.get(url)
+        inp = wd.until(ec.visibility_of_element_located((By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/'
+                                                                   'div[1]/div/app-bankrupt-form/div/form/'
+                                                                   'app-form-search-string/div/form/div/div/el-input/div/'
+                                                                   'div/div/input')))
+        inp.send_keys(inn, Keys.ENTER)
         try:
-            driver.find_element(By.XPATH,'/html/body/app-root/section/div[1]/app-bankrupt/div/div[2]/div/'
-                                         'app-loader/div/div/div[1]')
-            inp.send_keys(surname + ' ' + name + ' ' + patronymic)
-            inp.send_keys(Keys.ENTER)
-            wd.until(EC.visibility_of_element_located((By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/'
+            wd.until(ec.visibility_of_element_located((By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/'
                                                                  'div[2]/div/app-loader/div[1]/app-bankrupt-result/'
                                                                  'el-tab-panel/div[2]')))
-            individual = driver.find_element(By.XPATH,'/html/body/app-root/section/div[1]/app-bankrupt/div/div[2]/'
-                                                      'div/app-loader/div[1]/app-bankrupt-result/el-tab-panel/div[1]/ul/'
-                                                      'li[2]/div/span[2]')
+            individual = driver.find_element(By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/div[2]/'
+                                                       'div/app-loader/div[1]/app-bankrupt-result/el-tab-panel/div[1]/ul/'
+                                                       'li[2]/div/span[2]')
             if int(individual.text) >= 1:
                 return "Человек в базе присутствует"
-            else:
+
+            elif individual.text == '0':
+                return "Физлиц нет"
+        except NoSuchElementException or TimeoutException:
+            for number in inn:
+                inp.send_keys(Keys.BACKSPACE)
+            try:
+                driver.find_element(By.XPATH,'/html/body/app-root/section/div[1]/app-bankrupt/div/div[2]/div/'
+                                             'app-loader/div/div/div[1]')
+                inp.send_keys(surname + ' ' + name + ' ' + patronymic)
+                inp.send_keys(Keys.ENTER)
+                wd.until(ec.visibility_of_element_located((By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/'
+                                                                     'div[2]/div/app-loader/div[1]/app-bankrupt-result/'
+                                                                     'el-tab-panel/div[2]')))
+                individual = driver.find_element(By.XPATH,'/html/body/app-root/section/div[1]/app-bankrupt/div/div[2]/'
+                                                          'div/app-loader/div[1]/app-bankrupt-result/el-tab-panel/div[1]/ul/'
+                                                          'li[2]/div/span[2]')
+                if int(individual.text) >= 1:
+                    return "Человек в базе присутствует"
+                else:
+                    return "Человек в базе отсутствует"
+            except NoSuchElementException or TimeoutException:
                 return "Человек в базе отсутствует"
-        except:
-            return "Человек в базе отсутствует"
+    except Exception as e:
+        print(e)
+        return "Произошла ошибка на стороне ресурса или сервиса"

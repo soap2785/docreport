@@ -1,12 +1,12 @@
-import time
+import asyncio
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 
-from mainDIR.config import proxies
+from mainDIR.bot.config import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -17,6 +17,15 @@ driver = webdriver.Chrome(options=chrome_options)
 
 
 async def checkCivserv(fullname) -> list | str:
+    """
+    Возвращает состояние нахождения лица в базе госслужащих
+
+    Args:
+        fullname: полное ФИО интересующего лица
+
+    Returns:
+        Список, содержащий данные таблицы с сайта или строку, которая гласит что лица нет в базе
+    """
     fullname = fullname.split()
     surname = fullname[0]
     name = fullname[1]
@@ -29,8 +38,8 @@ async def checkCivserv(fullname) -> list | str:
 
     try:
         driver.get(url)
-        time.sleep(2)
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, 'table.text-center.table-hover.text-xs.line-height-xs')))
+        await asyncio.sleep(2)
+        WebDriverWait(driver, 10).until(ec.presence_of_element_located((By.CLASS_NAME, 'table.text-center.table-hover.text-xs.line-height-xs')))
         table = driver.find_element(By.XPATH, '/html/body/app-root/div/section[4]/app-trust-loss-dismissal-records-list/div/app-trust-loss-dismissal-records-table/app-loader/div/div/table/tbody')
         linesOfTable = table.find_elements(By.TAG_NAME, 'tr')
         listAbs = []
@@ -48,3 +57,6 @@ async def checkCivserv(fullname) -> list | str:
 
     except IndexError:
         return "Человека нет в базе данных"
+    except Exception as e:
+        print(e)
+        return "Произошла ошибка со стороны ресурса или сервиса"

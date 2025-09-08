@@ -1,8 +1,8 @@
 import asyncio
 from sqlite3 import connect
 
-from config import bot, dp
-from endpointsForBot import mainRouter
+from mainDIR.bot.config import bot, dp
+from mainDIR.bot.endpointsForBot import mainRouter
 
 
 async def main():
@@ -12,7 +12,7 @@ async def main():
 
 
 if __name__ == "__main__":
-    with connect('database.db') as conn:
+    with connect('../database.db') as conn:
         conn.cursor().execute("""
         CREATE TABLE IF NOT EXISTS orders (
         id INTEGER PRIMARY KEY AUTOINCREMENT,

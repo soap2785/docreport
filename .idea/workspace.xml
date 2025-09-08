@@ -5,17 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="232f71b6-4c9f-4d75-b621-6e45688962e7" name="Changes" comment="modded whole files">
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/ShowOrderById.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/resendCurrentOrder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showAdminPanel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showNextOrder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showPrevOrder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/classes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/compile/compileHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/processes/generating/generateTGReportMessage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/FNS.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/FNS.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/INN.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/INN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha/captcha.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/captcha/captcha.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha/captcha.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/captcha.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/criminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/criminal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/business_logic/parsers/issIp.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/issIp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/endpointsForBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/endpointsForBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compiling.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/compiling.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generateDOCXReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/generateDOCXReportFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generatePDFReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/generatePDFReportFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/suspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/suspect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/wanted.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/wanted.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/endpointsForBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/endpointsForBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compilator.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compiling.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/compile/compilingProcess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generateDOCXReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/generating/generateDOCXReportFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generatePDFReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/generating/generatePDFReportFile.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +54,12 @@
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {}
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/soap2785/docreport.git",
-    "accountId": "ff96e28e-f904-4d9c-9929-9f220f6bb682"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/soap2785/docreport.git&quot;,
+    &quot;accountId&quot;: &quot;ff96e28e-f904-4d9c-9929-9f220f6bb682&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/main_tg_bot.py" root0="SKIP_INSPECTION" />
   </component>
@@ -94,11 +112,11 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/mainDIR/processes/payment/referencesTEMP" />
-      <recent name="$PROJECT_DIR$/mainDIR/processes/payment" />
+      <recent name="$PROJECT_DIR$/mainDIR/processes/bot" />
       <recent name="$PROJECT_DIR$/mainDIR" />
-      <recent name="$PROJECT_DIR$/mainDIR/misc/Payment" />
-      <recent name="$PROJECT_DIR$/mainDIR/processes" />
+      <recent name="$PROJECT_DIR$/mainDIR/bot" />
+      <recent name="$PROJECT_DIR$/mainDIR/processes/generating" />
+      <recent name="$PROJECT_DIR$/mainDIR/processes/compile" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -225,7 +243,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mainDIR/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mainDIR/bot/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -408,7 +426,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757014000451</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="modded whole files">
+      <option name="closed" value="true" />
+      <created>1757015458628</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1757015458628</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

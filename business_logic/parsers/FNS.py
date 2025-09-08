@@ -1,4 +1,4 @@
-import time
+import asyncio
 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
@@ -6,10 +6,10 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 
-from business_logic.parsers.captcha.captcha import solveCaptcha
-from mainDIR.config import proxies
+from business_logic.parsers.captcha import solveCaptcha
+from mainDIR.bot.config import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -22,7 +22,7 @@ url = 'https://egrul.nalog.ru/index.html'
 
 def captchaForEgrul():
     try:
-        WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="uniDialogContainer"]')))
+        WebDriverWait(driver, 1).until(ec.visibility_of_element_located((By.XPATH, '//*[@id="uniDialogContainer"]')))
         iframe = driver.find_element(By.ID, "uniDialogFrame")
         driver.switch_to.frame(iframe)
         elementInsideIframe = driver.find_element(By.XPATH, '//*[@id="dialogContent"]/div/div/div/div/img')
@@ -32,13 +32,21 @@ def captchaForEgrul():
         inp.send_keys(solved.get('code'))
         inp.send_keys(Keys.ENTER)
         driver.switch_to.default_content()
-        WebDriverWait(driver, 3).until(EC.invisibility_of_element_located((By.XPATH, '//*[@id="uniDialogContainer"]')))
-        print(101)
+        WebDriverWait(driver, 3).until(ec.invisibility_of_element_located((By.XPATH, '//*[@id="uniDialogContainer"]')))
     except TimeoutException:
-        pass
+        return TimeoutException
 
 
 async def suggestFNS(inn, fullname) -> str | None:
+    """
+    Возвращает состояние нахождения лица в ЕГРЮЛ/ЕГРИП
+
+    Args:
+        inn: ИНН интересующего лица (получено из suggestINNPost)
+        fullname: полное ФИО интересующего лица
+
+    Returns: str
+    """
     try:
         driver.get(url)
         if driver.find_element(By.XPATH, '//*[@id="uniPageSubtitle"]').text == 'Технологические работы':
@@ -55,14 +63,14 @@ async def suggestFNS(inn, fullname) -> str | None:
 
             try:
                 captchaForEgrul()
-            except:
+            except TimeoutException:
                 pass
 
-            WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
-            time.sleep(0.3)
+            WebDriverWait(driver, 10).until(ec.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
+            await asyncio.sleep(0.3)
 
             try:
-                WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
+                WebDriverWait(driver, 1).until(ec.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
                 pass
 
             except TimeoutException:
@@ -75,22 +83,22 @@ async def suggestFNS(inn, fullname) -> str | None:
 
             try:
                 captchaForEgrul()
-            except:
+            except TimeoutException:
                 pass
 
             try:
-                WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="resultContent"]')))
+                WebDriverWait(driver, 1).until(ec.visibility_of_element_located((By.XPATH, '//*[@id="resultContent"]')))
                 return "Человек есть в базе данных"
             except TimeoutException or NoSuchElementException:
                 return "Человека нет в базе данных"
         else:
             inp = driver.find_element(By.XPATH, '//*[@id="query"]')
-            WebDriverWait(driver, 10).until(EC.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
-            time.sleep(0.3)
+            WebDriverWait(driver, 10).until(ec.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
+            await asyncio.sleep(0.3)
 
             try:
                 WebDriverWait(driver, 1).until(
-                    EC.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
+                    ec.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
                 pass
 
             except TimeoutException:
@@ -103,13 +111,16 @@ async def suggestFNS(inn, fullname) -> str | None:
 
             try:
                 captchaForEgrul()
-            except:
+            except TimeoutException:
                 pass
 
             try:
-                WebDriverWait(driver, 1).until(EC.visibility_of_element_located((By.XPATH, '//*[@id="resultContent"]')))
+                WebDriverWait(driver, 1).until(ec.visibility_of_element_located((By.XPATH, '//*[@id="resultContent"]')))
                 return "Человек есть в базе данных"
             except TimeoutException or NoSuchElementException:
                 return "Человека нет в базе данных"
     except NoSuchElementException:
         return "На ресурсе технические работы"
+    except Exception as e:
+        print(e)
+        return None

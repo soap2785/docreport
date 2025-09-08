@@ -1,43 +1,51 @@
 import datetime
 
-import requests
+import httpx
 
-from mainDIR.config import proxies
+from mainDIR.bot.config import proxies
 
 
-def suggestInnPOST(fullname, birthdate, docNumber, docDate):
-    url = "https://service.nalog.ru/inn-proc.do"
+async def suggestInnPOST(fullname, birthdate, passport, passportDate):
+    """
+    Возвращает ИНН на основе предоставленных данных, используя POST-запрос к сервису Налоговой службы.
 
-    fullname = fullname.split()
-    surname = fullname[0]
-    name = fullname[1]
-    patronymic = fullname[2]
+    Args:
+        fullname: Полное имя (ФИО) в виде строки, разделенной пробелами.
+        birthdate: Дата рождения в формате datetime.date.
+        passport: Номер паспорта.
+        passportDate: Дата выдачи паспорта в формате datetime.date.
 
-    if type(birthdate) is not datetime.datetime:
-        birthdate = datetime.datetime.strptime(birthdate, "%Y-%m-%d %H:%M:%S")
-        birthdate = datetime.datetime.strftime(birthdate, "%d.%m.%Y")
-    else:
-        birthdate = datetime.datetime.strftime(birthdate, "%d.%m.%Y")
+    Returns:
+        Словарь с данными ответа от Налоговой службы (включая ИНН, если найден)
+        или None в случае ошибки.
+    """
+    try:
+        url = "https://service.nalog.ru/inn-proc.do"
 
-    if type(docDate) is not datetime.datetime:
-        docDate = datetime.datetime.strptime(docDate, "%Y-%m-%d %H:%M:%S")
-        docDate = datetime.datetime.strftime(docDate, "%d.%m.%Y")
-    else:
-        docDate = datetime.datetime.strftime(docDate, "%d.%m.%Y")
+        fullname = fullname.split()
+        surname = fullname[0]
+        name = fullname[1]
+        patronymic = fullname[2]
+        birthdate = datetime.datetime.strftime(birthdate, '%d.%m.%Y')
+        passportDate = datetime.datetime.strftime(passportDate, '%d.%m.%Y')
 
-    data = {
-        "fam": surname,
-        "nam": name,
-        "otch": patronymic,
-        "bdate": birthdate,
-        "bplace": "",
-        "doctype": "21",
-        "docno": docNumber,
-        "docdt": docDate,
-        "c": "innMy",
-        "captcha": "",
-        "captchaToken": "",
-    }
-    resp = requests.post(url=url, data=data, proxies=proxies)
-    resp.raise_for_status()
-    return resp.json()
+        async with httpx.AsyncClient(proxy=proxies.get('https')) as client:
+            data = {
+                "fam": surname,
+                "nam": name,
+                "otch": patronymic,
+                "bdate": birthdate,
+                "bplace": "",
+                "doctype": "21",
+                "docno": passport,
+                "docdt": passportDate,
+                "c": "innMy",
+                "captcha": "",
+                "captchaToken": "",
+            }
+            resp = await client.post(url=url, data=data)
+            resp.raise_for_status()
+            return resp.json()
+    except Exception as e:
+        print(e)
+        return None

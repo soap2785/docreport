@@ -6,8 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 
-from business_logic.parsers.captcha.captcha import solveCaptcha
-from mainDIR.config import proxies
+from business_logic.parsers.captcha import solveCaptcha
+from mainDIR.bot.config import proxies
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()

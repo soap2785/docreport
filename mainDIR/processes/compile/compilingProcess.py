@@ -1,14 +1,23 @@
+import datetime
+
 from business_logic.parsers.INN import suggestInnPOST
 from business_logic.parsers.FNS import suggestFNS
 from business_logic.parsers.bankrupts import bankrupt
 from business_logic.parsers.issIp import iss_ip
 from business_logic.parsers.terrorist import terroristCheck
 from business_logic.parsers.civil_service import checkCivserv
+from mainDIR.processes.bot.classes import RequesterData
 
 
-async def compileData(fullname, region, birthdate, passport, passportDate) -> dict | None:
+async def compileData() -> dict | None:
+    fullname: str = RequesterData.fullname
+    region: str = RequesterData.region
+    birthdate: datetime.date = RequesterData.birthdate
+    passport: str = RequesterData.passport
+    passportDate: datetime.date = RequesterData.passportDate
+
     try:
-        getINN = suggestInnPOST(fullname, birthdate, passport, passportDate)
+        getINN = await suggestInnPOST(fullname, birthdate, passport, passportDate)
         if getINN != 'Информация об ИНН не найдена.' and getINN != '' and getINN != "Нет доступа к ресурсу" and getINN.get('code') != 0:
             getFNS = await suggestFNS(getINN, fullname)
             getTerrorist = await terroristCheck(fullname)

@@ -2,10 +2,19 @@
   <dictionary name="project">
     <words>
       <w>arialmt</w>
+      <w>bdate</w>
+      <w>bplace</w>
       <w>civserv</w>
+      <w>docdt</w>
+      <w>docno</w>
       <w>egrul</w>
+      <w>khtml</w>
+      <w>otch</w>
+      <w>tbody</w>
       <w>tgid</w>
+      <w>unichk</w>
       <w>напишите</w>
+      <w>физлиц</w>
     </words>
   </dictionary>
 </component>

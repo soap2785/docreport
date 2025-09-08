@@ -7,21 +7,28 @@ from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfgen import canvas
 from reportlab.pdfgen.canvas import Canvas
 
-from mainDIR.processes.compiling import compileData
+from mainDIR.processes.bot.classes import RequesterData
 
 
 async def generatePDFReport(
-        fullname: str,
-        region: str,
-        birthdate: datetime.date,
-        passport: str,
-        passportDate: datetime.date,
-        ID: int | tuple) -> tuple:
+        ID: int | tuple,
+        CompiledData: dict
+) -> str:
     if type(ID) is tuple:
         ID = ID[0]
-    fullnameForFilename = fullname.replace(' ', '-')
+
+    fullnameForFilename = RequesterData.fullname.replace(' ', '-')
     filename = f"Report-{ID}-{fullnameForFilename}.pdf"
-    result = await compileData(fullname, region, birthdate, passport, passportDate)
+
+    fullname = RequesterData.fullname
+    region = RequesterData.region
+    birthdate = RequesterData.birthdate
+    passport = RequesterData.passport
+    passportDate = RequesterData.passportDate
+
+    birthdate = datetime.datetime.strftime(birthdate, "%d.%m.%Y")
+    passportDate = datetime.datetime.strftime(passportDate, "%d.%m.%Y")
+
     pdfmetrics.registerFont(TTFont('arialmt', '../arialmt.ttf'))
     c = canvas.Canvas(filename, pagesize=letter)
     c.setFont("arialmt", 16)
@@ -32,33 +39,33 @@ async def generatePDFReport(
     c.drawString(40, 700, f"Паспорт: {passport}")
     c.drawString(40, 680, f"Дата выдачи паспорта: {passportDate}")
 
-    if result.get('inn') != 'Информация об ИНН не найдена.' and result.get('inn') != '' and result.get('inn') != "Нет доступа к ресурсу" and result.get('inn'):
+    if CompiledData.get('inn') != 'Информация об ИНН не найдена.' and CompiledData.get('inn') != '' and CompiledData.get('inn') != "Нет доступа к ресурсу" and CompiledData.get('inn'):
         c.setFont("arialmt", 14)
-        c.drawString(40, 640, f"ИНН: {result.get('inn').get('inn')}")
-        c.drawString(40, 620, f"ФНС: {result.get('fns')}")
-        c.drawString(40, 600, f"База террористов: {result.get('ter')}")
-        c.drawString(40, 580, f"Госслужба: {result.get('civ')}")
-        c.drawString(40, 560, f"Банкротство: {result.get('bank')}")
+        c.drawString(40, 640, f"ИНН: {CompiledData.get('inn').get('inn')}")
+        c.drawString(40, 620, f"ФНС: {CompiledData.get('fns')}")
+        c.drawString(40, 600, f"База террористов: {CompiledData.get('ter')}")
+        c.drawString(40, 580, f"Госслужба: {CompiledData.get('civ')}")
+        c.drawString(40, 560, f"Банкротство: {CompiledData.get('bank')}")
         c.drawString(40, 540, f"Исполнительные производства:")
         c.setFont("arialmt", 14)
-        if result.get('iss') != "Ничего не найдено":
-            await drawIssIp(result, c, 550)
+        if CompiledData.get('iss') != "Ничего не найдено":
+            await drawIssIp(CompiledData, c, 550)
         else:
             c.drawString(40, 560, "Ничего не найдено")
 
     else:
         c.setFont("arialmt", 14)
-        c.drawString(40, 640, f"ФНС: {result.get('fns')}")
-        c.drawString(40, 620, f"База террористов: {result.get('ter')}")
-        c.drawString(40, 600, f"Госслужба: {result.get('civ')}")
+        c.drawString(40, 640, f"ФНС: {CompiledData.get('fns')}")
+        c.drawString(40, 620, f"База террористов: {CompiledData.get('ter')}")
+        c.drawString(40, 600, f"Госслужба: {CompiledData.get('civ')}")
         c.drawString(40, 580, "Исполнительные производства:")
-        if result.get('iss') != "Ничего не найдено":
-            await drawIssIp(result, c, 590)
+        if CompiledData.get('iss') != "Ничего не найдено":
+            await drawIssIp(CompiledData, c, 590)
         else:
             c.drawString(40, 560, "Ничего не найдено")
     c.save()
     await asyncio.sleep(1)
-    return filename, result
+    return filename
 
 
 async def drawIssIp(result: dict, canvasObject: Canvas, startPosition: int):
@@ -73,10 +80,10 @@ async def drawIssIp(result: dict, canvasObject: Canvas, startPosition: int):
             startPosition -= 10
             row = result.get('iss')[rowIterable]
             if row:
-                for x, line in enumerate(row):
+                for line in row:
                     if len(line) >= 60:
                         text = line.split("\n")
-                        for line in text:
+                        for specifiedLine in text:
                             someSpace += 1
                             c.drawString(40, startPosition - (20 * someSpace), line)
                     else:

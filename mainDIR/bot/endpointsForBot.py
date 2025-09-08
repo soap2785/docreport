@@ -1,62 +1,22 @@
 import os
-from datetime import datetime
-from time import strptime
+import datetime
 
 from aiogram import Router, F
 from aiogram.filters import CommandStart, Command
 from aiogram.fsm.context import FSMContext
-from aiogram.fsm.state import StatesGroup, State
-from aiogram.types import Message, FSInputFile  # InlineKeyboardButton, InlineKeyboardMarkup
+from aiogram.types import Message, FSInputFile
 
-from config import dp, regions, bot
-from processes.compilator import compilation
-from processes.admin import admin, admins, nextOrder, prevOrder, showByID, retry
+from mainDIR.bot.config import dp, regions, bot, admins
+from mainDIR.processes.bot.adminTemplates.ShowOrderById import showByID
+from mainDIR.processes.bot.adminTemplates.resendCurrentOrder import resend
+from mainDIR.processes.bot.adminTemplates.showAdminPanel import admin
+from mainDIR.processes.bot.adminTemplates.showNextOrder import nextOrder
+from mainDIR.processes.bot.adminTemplates.showPrevOrder import prevOrder
+from mainDIR.processes.compile.compileHandler import compilation
+from mainDIR.processes.bot.classes import RequesterData, Messages, Data, LessThan14Error
 
-
-currentUser = {}
 mainRouter = Router()
-adminPanel = []
-curTGID = []
 blacklistOfWordsForUser = ('admin', '/show', '/retry', '/next', '/back')
-
-
-class Messages:
-    class Start:
-        start: str = 'Добро пожаловать! Напишите ФИО интересующего лица.'
-
-    class Fullname:
-        valid: str = 'Введите регион интересующего лица'
-        exception: str = 'Введите фамилию, имя и отчество'
-
-    class Region:
-        valid: str = 'Введите дату рождения'
-        exception: str = 'Регион невалиден'
-
-    class Birthdate:
-        valid: str = 'Введите серию и номер паспорта'
-        exception: str = 'Введите дату рождения в данном формате: ДД.ММ.ГГГГ'
-
-    class Passport:
-        class Number:
-            valid: str = 'Введите дату выдачи паспорта'
-            exception: str = 'Введённые серия и номер паспорта невалидны. Введите в формате 12 34 567890'
-
-        class Date:
-            valid: str = 'Тут должна быть оплата, после которой отправится отчёт в формате PDF.'
-            exceptionTimeFormat: str = 'Введите корректную дату выдачи паспорта в формате ДД.ММ.ГГГГ'
-            exceptionLessThan14: str = 'Дата выдачи невалидна - она меньше 14 лет.'
-
-
-class Data(StatesGroup):
-    fullname = State()
-    region = State()
-    birthdate = State()
-    passport = State()
-    passportDate = State()
-
-
-class LessThan14Error(Exception):
-    pass
 
 
 @mainRouter.message(Command('next'))
@@ -71,7 +31,7 @@ async def prevOrderHandler(message: Message) -> None:
 
 @mainRouter.message(Command('retry'))
 async def retryHandler(message: Message) -> None:
-    await retry(message)
+    await resend(message)
 
 
 @mainRouter.message(Command('show'))
@@ -81,15 +41,11 @@ async def showByIDHandler(message: Message) -> None:
 
 @dp.message(CommandStart())
 async def commandStartHandler(message: Message, state: FSMContext) -> None:
-    await state.set_state(Data.fullname)
     if message.from_user.id not in admins:
+        await state.set_state(Data.fullname)
         await message.answer(Messages.Start.start)
-        currentUser.setdefault(message.from_user.id, {'fullname': str, 'region': str, 'birthdate': datetime, 'passport': str, 'passportDate': datetime})
-
-
-@mainRouter.message(F.text == 'admin')
-async def adminHandler(message: Message):
-    await admin(message)
+    else:
+        await admin(message)
 
 
 @mainRouter.message(F.text, Data.fullname)
@@ -98,7 +54,7 @@ async def processFullname(message: Message, state: FSMContext) -> None:
         fullname = message.text.split()
 
         if len(fullname) == 3:
-            currentUser[message.from_user.id]['fullname'] = message.text
+            RequesterData.fullname = message.text
             await state.set_state(Data.region)
             await message.answer(Messages.Fullname.valid)
 
@@ -110,7 +66,7 @@ async def processFullname(message: Message, state: FSMContext) -> None:
 @mainRouter.message(Data.region)
 async def processRegion(message: Message, state: FSMContext) -> None:
     if message.text in regions:
-        currentUser[message.from_user.id]['region'] = message.text
+        RequesterData.region = message.text
         await state.set_state(Data.birthdate)
         await message.answer(Messages.Region.valid)
 
@@ -122,7 +78,7 @@ async def processRegion(message: Message, state: FSMContext) -> None:
 @mainRouter.message(Data.birthdate)
 async def processBirthdate(message: Message, state: FSMContext):
     try:
-        currentUser[message.from_user.id]['birthdate'] = datetime.strptime(message.text, '%d.%m.%Y')
+        RequesterData.birthdate = datetime.datetime.strptime(message.text, '%d.%m.%Y').date()
         await state.set_state(Data.passport)
         await message.answer(Messages.Birthdate.valid)
 
@@ -135,7 +91,7 @@ async def processBirthdate(message: Message, state: FSMContext):
 async def processPassport(message: Message, state: FSMContext):
     try:
         if message.text[2] == ' ' and message.text[5] == ' ' and len(message.text) == 12:
-            currentUser[message.from_user.id]['passport'] = message.text
+            RequesterData.passport = message.text
             await state.set_state(Data.passportDate)
             await message.answer(Messages.Passport.Number.valid)
 
@@ -150,22 +106,24 @@ async def processPassport(message: Message, state: FSMContext):
 @mainRouter.message(Data.passportDate)
 async def processPassportDate(message: Message, state: FSMContext):
     try:
-        passportDate = strptime(message.text, '%d.%m.%Y')
-        birthdate = currentUser.get(message.from_user.id).get('birthdate')
-        passportDateDatetime = datetime(*passportDate[:6])
-        dates_diff = passportDateDatetime - birthdate
+        passportDate = datetime.datetime.strptime(message.text, '%d.%m.%Y').date()
+        birthdate = RequesterData.birthdate
+        dates_diff = passportDate - birthdate
         age_in_days = dates_diff.days
         age_in_years = age_in_days / 365
         if age_in_years < 14:
             raise LessThan14Error
 
-        currentUser[message.from_user.id]['passportDate'] = passportDateDatetime
+        RequesterData.passportDate = passportDate
         await message.answer(Messages.Passport.Date.valid)
-        returned = await compilation(currentUser, message.from_user.id, message.chat.id)
-        await bot.send_document(message.chat.id, FSInputFile(returned[0][0]))
+        print(datetime.datetime.now())
+        returned = await compilation(message.from_user.id, message)
+        await bot.send_message(message.chat.id, returned[0])
         await bot.send_document(message.chat.id, FSInputFile(returned[1]))
-        os.remove(returned[0][0])
+        await bot.send_document(message.chat.id, FSInputFile(returned[2]))
+        print(datetime.datetime.now())
         os.remove(returned[1])
+        os.remove(returned[2])
 
     except LessThan14Error:
         await message.answer(Messages.Passport.Date.exceptionLessThan14)
