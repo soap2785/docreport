@@ -31,7 +31,7 @@ auth = HTTPBasicAuth()
 IP = "0.0.0.0"
 PORT = 20001
 admin_name = "secret"
-admin_password = "secrt"
+admin_password = "secret"
 users = {admin_name: generate_password_hash(admin_password),}
 app.config.from_pyfile('config.cfg')
 app.config['SECRET_KEY']='secret'
