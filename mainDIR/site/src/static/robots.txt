@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Host: docreport.ru
+Sitemap: http://docreport.ru/sitemap.xml
+
+

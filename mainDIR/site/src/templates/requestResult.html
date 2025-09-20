@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Подтверждение</title>
+<link rel="stylesheet"  href="{{ url_for('static', filename='css/stylesheet.css') }}?v=2.123213">
+<link rel="shortcut icon" href="{{ url_for('static', filename='icon.ico') }}">
+<meta name="keywords" content="проверить человека, проверить контрагента, проверить задолженность, фссп проверка, судебные задолженность, приставы задолженность проверить, проверка по фссп"/>
+<meta name="description" content="Docreport— сервис проверки человека на розыски, долги и пр. полная и достоверная проверка лица во всех государственных базах данных мвд, фссп, судов и налоговой."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+<body>
+ <div class="RowInputContainer_left button_main_link">
+      <a class="blueTheme" href="/">На главную</a>
+ </div>
+
+<div class="requestContainer">
+  <h2>Заказ №{{id_document}}</h2>
+  <form action="/create" method="post">
+    <input type="hidden" name="id_document" value="{{id_document}}" readonly>
+    <input type="text" name="surname" placeholder="Фамилия *" required value="{{surname}}" readonly >
+    <input type="text" name="name" placeholder="Имя *" required value="{{name}}" readonly >
+    <input type="text" name="patronymic" placeholder="Отчество *" required value="{{patronymic}}" readonly >
+    <input type="text" name="region" value="{{region}}" readonly >
+    <div class="RowInputContainer">
+      <div class="ColumnInputContainer">
+        <div>Дата рождения</div>
+        <input id="birthdate" type="date" name="birthdate" placeholder="дд.мм.гггг" min="1920-01-01" value="{{birthdate}}" readonly >
+      </div>
+      <div class="ColumnInputContainer">
+        <div>Серия и номер паспорта</div>
+        <input id="docnumber" type="text" name="docnumber" placeholder="Серия и номер паспорта" value="{{docnumber}}" max="9999999999" min="1000000000" readonly>
+      </div>
+      <div class="ColumnInputContainer">
+        <div>Дата выдачи паспорта</div>
+        <input id="docdate" type="date" name="docdate" placeholder="дд.мм.гггг" min="1991-01-01" value="{{docdate}}" readonly>
+      </div>
+    </div>
+    <input type="email" name="email" placeholder="Email для получения отчета *" required value="{{email}}" readonly>
+
+    <div class="RowInputContainer_left">
+      <div><input type="checkbox" name="sogl_1" checked required readonly/>Я даю своё согласие на обработку моих персональных данных на условиях и с целями, указанными в <a href="/personal-data">Политике в отношении обработки персональных данных.</a></div>
+    </div>
+
+    <div class="RowInputContainer_left">
+      <div><input type="checkbox" name="sogl_2" checked required readonly/>Я согласен с условиями <a href="/oferta">Публичной оферты.</a></div>
+    </div>
+
+
+
+    <div class="RowInputContainer_left">
+      <input class="lightTheme" name="action" type="submit" value="РЕДАКТИРОВАТЬ">
+      <!--<input class="blueTheme" name="action" type="submit" value="ОПЛАТИТЬ QIWI">-->
+      <input class="blueTheme" name="action" type="submit" value="ОПЛАТИТЬ">
+    </div>
+  </form>
+
+  <br>
+
+  <div class="RowInputContainer">
+      <a href="/oferta">Публичная оферта</a>
+      <a href="/personal-data">Политика в отношении обработки персональных данных</a>
+      <a href="/contacts">Контакты</a>
+  </div>
+
+</div>
+
+
+</body>
+</html>

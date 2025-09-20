@@ -5,35 +5,70 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="232f71b6-4c9f-4d75-b621-6e45688962e7" name="Changes" comment="modded whole files">
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/ShowOrderById.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/resendCurrentOrder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showAdminPanel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showNextOrder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showPrevOrder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/bot/classes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/compile/compileHandler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/processes/generating/generateTGReportMessage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/businessLogic/classForParsers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/businessLogic/driverClass.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/businessLogic/parsers/bankrupts.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/currentOrder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/compile/compileHandler.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/compile/compilingProcess.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointAlertYoo.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointCreate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointFuse.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointGetData.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointMainThreadGET.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointMainThreadPOST.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointRetry.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/generating/generateDOCXReportFile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/generating/generatePDFReportFile.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/generating/generatePreview.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/misc/addYooPay.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/misc/checkFormForPOST.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/misc/classesForSite.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/arialmt.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/mainSite.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/static/css/stylesheet.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/static/icon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/static/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/static/sitemap.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/admin_panel.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/payPage.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/payPageYoo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/request.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/requestResult.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/successYoo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/yandex_2193512d5ec2b4c5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/Контакты.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/Политика.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/Публичная оферта.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/FNS.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/FNS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/INN.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/INN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha/captcha.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/captcha.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/criminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/criminal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/issIp.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/issIp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/suspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/suspect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/wanted.py" beforeDir="false" afterPath="$PROJECT_DIR$/business_logic/parsers/wanted.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/endpointsForBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/endpointsForBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compilator.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compiling.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/compile/compilingProcess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generateDOCXReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/generating/generateDOCXReportFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generatePDFReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/processes/generating/generatePDFReportFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arialmt.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/src/arialmt.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/FNS.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/FNS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/INN.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/INN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/captcha.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/civilService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/criminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/notFinishedParsers/criminal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/issIp.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/issIp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/suspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/notFinishedParsers/suspect.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/terrorist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/business_logic/parsers/wanted.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/notFinishedParsers/wanted.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/bot/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/src/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/bot/endpointsForBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/src/endpointsForBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/src/mainBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/ShowOrderById.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/orderById.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/resendCurrentOrder.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showAdminPanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/adminPanel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showNextOrder.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/nextOrder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showPrevOrder.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/prevOrder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/classesForBot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compile/compileHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/compile/compileHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compile/compilingProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/compile/compilingProcess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generating/generateDOCXReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/generating/generateDOCXReportFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generating/generatePDFReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/generating/generatePDFReportFile.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generating/generateTGReportMessage.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/generating/generateTGReportMessage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,9 +121,13 @@
     &quot;Python.civil_sservice.executor&quot;: &quot;Run&quot;,
     &quot;Python.compilator.executor&quot;: &quot;Run&quot;,
     &quot;Python.criminal.executor&quot;: &quot;Run&quot;,
+    &quot;Python.issIp.executor&quot;: &quot;Run&quot;,
     &quot;Python.iss_ip.executor&quot;: &quot;Run&quot;,
     &quot;Python.kad_arbitr.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mainBot.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mainSite (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.mainSite.executor&quot;: &quot;Run&quot;,
     &quot;Python.mainTGBot.executor&quot;: &quot;Run&quot;,
     &quot;Python.main_tg_bot.executor&quot;: &quot;Run&quot;,
     &quot;Python.pdf.executor&quot;: &quot;Run&quot;,
@@ -99,28 +138,28 @@
     &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/desktop/Downloads/ru-6.5.0.12.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/desktop/PycharmProjects/docreport/mainDIR/bot/src&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;memory.settings&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mainDIR/bot/src" />
+      <recent name="$PROJECT_DIR$/mainDIR/site/processes" />
+      <recent name="$PROJECT_DIR$/mainDIR/site" />
+      <recent name="$PROJECT_DIR$/mainDIR/site/processes/generating" />
       <recent name="$PROJECT_DIR$/mainDIR/processes" />
-      <recent name="$PROJECT_DIR$/mainDIR" />
-      <recent name="$PROJECT_DIR$/mainDIR/misc/Payment" />
-      <recent name="$PROJECT_DIR$/mainDIR/templates" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/mainDIR/processes/bot" />
-      <recent name="$PROJECT_DIR$/mainDIR" />
-      <recent name="$PROJECT_DIR$/mainDIR/bot" />
-      <recent name="$PROJECT_DIR$/mainDIR/processes/generating" />
-      <recent name="$PROJECT_DIR$/mainDIR/processes/compile" />
+      <recent name="$PROJECT_DIR$/business_logic" />
+      <recent name="$PROJECT_DIR$/mainDIR/site/src" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/mainDIR/bot/src" />
+      <recent name="$PROJECT_DIR$/mainDIR/site/processes/misc" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
-    <configuration name="FNS" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.mainBot">
+    <configuration name="mainBot" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="docreport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,11 +168,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/business_logic/parsers" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mainDIR/bot/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/business_logic/parsers/FNS.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mainDIR/bot/src/mainBot.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -142,7 +181,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="bankrupts" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration name="mainSite" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="docreport" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -151,99 +190,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/business_logic/parsers" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mainDIR/site/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\Game\PycharmProjects\docreport\business_logic\parsers\bankrupts.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="civil_service" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="docreport" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/business_logic/parsers" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/business_logic/parsers/civil_service.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="criminal" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="docreport" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/business_logic/parsers" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/business_logic/parsers/criminal.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="issIp" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="docreport" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/business_logic/parsers" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/business_logic/parsers/issIp.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="docreport" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/mainDIR" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mainDIR/bot/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mainDIR/site/src/mainSite.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -274,37 +225,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="terrorist" type="PythonConfigurationType" factoryName="Python">
-      <module name="docreport" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/business_logic/parsers/terrorist.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.FNS" />
-      <item itemvalue="Python.bankrupts" />
-      <item itemvalue="Python.civil_service" />
-      <item itemvalue="Python.criminal" />
-      <item itemvalue="Python.issIp" />
+      <item itemvalue="Python.mainBot" />
+      <item itemvalue="Python.mainSite" />
       <item itemvalue="Python.mainTGBot" />
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.terrorist" />
     </list>
   </component>
   <component name="SharedIndexes">
@@ -434,7 +358,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757015458628</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="modded whole files">
+      <option name="closed" value="true" />
+      <created>1757336886245</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1757336886245</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

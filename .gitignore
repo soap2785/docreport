@@ -1,5 +1,5 @@
-urlForParsers.text
-mainDIR/bot/config.py
-config.cfg
-/mainDIR/database.db
-/mainDIR/bot/config.py
+/mainDIR/bot/src/config.py
+/mainDIR/bot/src/database.db
+/mainDIR/site/src/config.cfg
+/mainDIR/site/src/databaseSITE.db
+/mainDIR/site/src/config.py

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Admin</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='/css/stylesheet.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon.ico') }}">
+
+</head>
+<body>
+<div class="requestContainer">
+
+    <div class="RowInputContainer_center">
+        <h2>Админ панель</h2>
+    </div>
+    <div class="form" id="mainContainer">
+        <div class="RowInputContainer_center">
+            <div class="cell">id</div>
+            <div class="cell">имя</div>
+            <div class="cell">фамилия</div>
+            <div class="cell">отчество</div>
+            <div class="cell">регион</div>
+            <div class="cell">дата рождения</div>
+            <div class="cell">паспорт</div>
+            <div class="cell">дата выдачи</div>
+            <div class="cell">email</div>
+            <div class="cell">состояние</div>
+            <div class="cell">id заказа</div>
+            <div class="cell">повторить</div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+    <br>
+    <div class="RowInputContainer_center">
+        <button class="blueTheme" id="previous"> </button>
+          <input type="number" id="currentPage" value="1" min="1" size="4">
+          <button class="blueTheme" id="next">></button>
+    </div>
+
+</div>
+
+</body>
+
+<script>
+
+    function updatePage() {
+        number = document.getElementById("currentPage").value;
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "/getData");
+
+        xhr.onload  = function() {
+            var jsonResponse = xhr.response;
+            console.log(jsonResponse)
+
+
+            megaContainer = document.getElementById("mainContainer")
+            megaContainer.innerHTML = '';
+
+            let el = document.createElement("div")
+            el.classList.add('RowInputContainer_center');
+
+            let el2 = document.createElement("div")
+            el2.classList.add('cell');
+            el2.textContent = 'id';
+            el.appendChild(el2);
+
+            el2 = el2.cloneNode();el2.textContent = 'имя';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'фамилия';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'отчество';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'регион';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'дата рождения';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'паспорт';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'дата выдачи';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'email';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'состояние';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'id заказа';el.appendChild(el2);
+            el2 = el2.cloneNode();el2.textContent = 'повторить?';el.appendChild(el2);
+
+            megaContainer.appendChild(el);
+
+            const data = JSON.parse(jsonResponse);
+
+            for (let i = 0; i < data.length; i++) {
+                el = el.cloneNode();
+                for (let j = 0; j < data[i].length; j++) {
+                    el2 = el2.cloneNode();el2.textContent = data[i][j];el.appendChild(el2);
+                }
+                el3 = el2.cloneNode();
+                el3.classList.add('btn');
+                el3.textContent = "повторить";
+                el3.addEventListener("click", function() {
+
+                    const xhr2 = new XMLHttpRequest();
+                    xhr2.open("POST", "/retry");
+                    xhr2.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                    const body2 = JSON.stringify({
+                      id: data[i][0]
+                    });
+                    xhr2.send(body2);
+
+                  console.log("повторяем"+data[i][0]);
+                });
+                el.appendChild(el3);
+
+                megaContainer.appendChild(el);
+            }
+        };
+
+        xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+        const body = JSON.stringify({
+          page: number
+        });
+        xhr.send(body);
+    }
+
+    updatePage();
+
+    document.getElementById("currentPage").addEventListener('change', updatePage);
+    document.getElementById("next").addEventListener("click", function() {
+      document.getElementById("currentPage").value = parseInt(document.getElementById("currentPage").value)+1;
+      updatePage();
+    });
+    document.getElementById("previous").addEventListener("click", function() {
+      if (parseInt(document.getElementById("currentPage").value) > 1){
+          document.getElementById("currentPage").value = parseInt(document.getElementById("currentPage").value)-1;
+          updatePage();
+      }
+    });
+
+
+
+</script>
+</html>

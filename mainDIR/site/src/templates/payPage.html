@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Оплата</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='icon.ico') }}">
+    <link rel="stylesheet"  href="{{ url_for('static', filename='/css/stylesheet.css') }}">
+
+</head>
+ 
+<body>
+    <div class="requestContainer">
+      <h2 id="doc_id">Заказ №{{id_document}}</h2>
+      <div class="form">
+          <div id="intellectmoney-payform">
+  <script async type="text/javascript">
+    fetch('https://merch.intellectmoney.ru/payform/?EshopId=465820&ServiceNameAuthor=0&ServiceName=&PaymentAmountIsReadonly=true&PaymentAmount=100&PaymentCurrency=%E2%82%BD&ButtonName=0&Preferences=&PayerData=&Comment=&CommentTip=&UserEmail=true&UserFullName=&PhoneNumber=&SuccessUrl=&OpenNewWindow=false&MerchantReceipt=%7B%22Content%22%3A%7B%22Type%22%3A1%2C%22Positions%22%3A%5B%5D%7D%7D').then(res=>res.text()).then((responseText)=>{const c=document.getElementById('intellectmoney-payform');c.innerHTML=responseText;Array.prototype.slice.call(new DOMParser().parseFromString(responseText,'text/html').getElementsByTagName('script')).forEach(s=>{let e=document.createElement('script');e.src=s.src;e.type=s.type;c.appendChild(e)})})
+    .then(() => {
+               console.log(document.getElementsByName("orderId")[0].value+"|"+document.getElementById("doc_id").innerText);
+               const xhr = new XMLHttpRequest();
+                   xhr.open("POST", "/fuse");
+                   xhr.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+                   const body = JSON.stringify({
+                     id_order: document.getElementsByName("orderId")[0].value,
+                     id_document: document.getElementById("doc_id").innerText
+                   });
+                   xhr.send(body);
+               document.getElementsByName("email")[0].value = "{{email}}";
+               document.getElementsByClassName("button")[0].click();
+               })
+                var messageElement = document.querySelector('.cookie-notification');
+        // Если нет cookies, то показываем плашку
+        if (!Cookies.get('agreement')) {
+            showMessage();
+        } else {
+            initCounter();
+        }
+        // Загружаем сам код счетчика сразу
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document,'script','//mc.yandex.ru/metrika/tag.js', 'ym')
+        // Функция добавляет класс к DOM-элементу. Вы можете использовать библиотеку jQuery или другой фреймворк
+        function addClass (o, c) {
+            var re = new RegExp("(^|\\s)" + c + "(\\s|$)", "g");
+            if (!o || re.test(o.className)) {
+                return;
+            }
+            o.className = (o.className + " " + c).replace(/\s+/g, " ").replace(/(^ | $)/g, "");
+        }
+        // Функция удаляет класс из DOM-элемента. Вы можете использовать библиотеку jQuery или другой фреймворк
+        function removeClass (o, c) {
+            var re = new RegExp('(^|\\s)' + c + '(\\s|$)', 'g');
+            if (!o) {
+                return;
+            }
+            o.className = o.className.replace(re, '$1').replace(/\s+/g, ' ').replace(/(^ | $)/g, '');
+        }
+        // Функция, которая прячет предупреждение
+        function hideMessage () {
+            addClass(messageElement, 'cookie-notification_hidden_yes');
+        }
+        // Функция, которая показывает предупреждение
+        function showMessage () {
+            removeClass(messageElement, 'cookie-notification_hidden_yes');
+        }
+        function saveAnswer () {
+            // Прячем предупреждение
+            hideMessage();
+
+            // Ставим cookies
+            Cookies.set('agreement', '1');
+        }
+        function initCounter () {
+            ym(XXXX, 'init', {});
+            saveAnswer();
+        }
+        // Нажатие кнопки "Я согласен"
+        document.querySelector('#yes').addEventListener('click', function () {
+            initCounter();
+        });
+  </script>
+</div>
+      <br>
+      <div class="RowInputContainer">
+      <a href="/oferta">Публичная оферта</a>
+      <a href="/personal-data">Политика в отношении обработки персональных данных</a>
+      <a href="/contacts">Контакты</a>
+  </div>
+
+    </div>
+
+
+
+
+</body>
+
+<script>
+</script>
+
+
+
+</html>
