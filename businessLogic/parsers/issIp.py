@@ -1,5 +1,5 @@
-import asyncio
 import datetime
+import time
 
 from selenium import webdriver
 from selenium.common import NoSuchElementException, TimeoutException
@@ -12,19 +12,18 @@ from selenium.webdriver.support import expected_conditions as ec
 from businessLogic.captcha import solveCaptcha
 from businessLogic.classForParsers import CompiledData
 from mainDIR.bot.src.config import proxies
-from businessLogic.driverClass import DriverClass
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
-driver = DriverClass.driver
+driver = webdriver.Chrome(options=chrome_options)
 url = 'https://fssp.gov.ru/iss/ip'
 wd = WebDriverWait(driver, 2)
 
 
-async def iss_ip(region, fullname, birthdate):
+def checkIssIp(region, fullname, birthdate):
     print(datetime.datetime.now(), "ISS")
     fullname = fullname.split()
     surname = fullname[0]
@@ -32,12 +31,14 @@ async def iss_ip(region, fullname, birthdate):
     patronymic = fullname[2]
     try:
         driver.get(url)
-        await asyncio.sleep(1)
+        time.sleep(1)
+
         try:
             driver.find_element(By.XPATH, '/html/body/div[2]/main/section/div/div/div[3]')
             CompiledData.iss = "Сервис недоступен"
             driver.quit()
             return None
+
         except NoSuchElementException:
             pass
 
@@ -78,6 +79,7 @@ async def iss_ip(region, fullname, birthdate):
 
     except NoSuchElementException as e:
         CompiledData.iss = "Ничего не найдено"
+
     finally:
         print(datetime.datetime.now(), "ISS")
         driver.quit()

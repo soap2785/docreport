@@ -1,5 +1,10 @@
-/mainDIR/bot/src/config.py
-/mainDIR/bot/src/database.db
-/mainDIR/site/src/config.cfg
-/mainDIR/site/src/databaseSITE.db
-/mainDIR/site/src/config.py
+__pycache__/
+config.py
+config.cfg
+*.db
+*.sqlite3
+
+.idea/
+.vscode
+.env
+env

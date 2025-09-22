@@ -5,70 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="232f71b6-4c9f-4d75-b621-6e45688962e7" name="Changes" comment="modded whole files">
-      <change afterPath="$PROJECT_DIR$/businessLogic/classForParsers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/businessLogic/driverClass.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/businessLogic/parsers/bankrupts.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/currentOrder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/compile/compileHandler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/compile/compilingProcess.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointAlertYoo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointCreate.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointFuse.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointGetData.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointMainThreadGET.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointMainThreadPOST.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/endpoints/endpointRetry.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/generating/generateDOCXReportFile.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/generating/generatePDFReportFile.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/generating/generatePreview.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/misc/addYooPay.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/misc/checkFormForPOST.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/processes/misc/classesForSite.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/arialmt.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/mainSite.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/static/css/stylesheet.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/static/icon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/static/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/static/sitemap.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/admin_panel.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/payPage.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/payPageYoo.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/request.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/requestResult.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/successYoo.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/yandex_2193512d5ec2b4c5.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/Контакты.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/Политика.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/Публичная оферта.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arialmt.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/src/arialmt.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/FNS.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/FNS.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/INN.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/INN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/bankrupts.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/captcha.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/captcha.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/civil_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/civilService.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/criminal.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/notFinishedParsers/criminal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/issIp.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/issIp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/suspect.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/notFinishedParsers/suspect.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/terrorist.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/terrorist.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/business_logic/parsers/wanted.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/notFinishedParsers/wanted.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/bot/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/src/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/bot/endpointsForBot.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/src/endpointsForBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/bot/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/src/mainBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/ShowOrderById.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/orderById.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/resendCurrentOrder.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showAdminPanel.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/adminPanel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showNextOrder.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/nextOrder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/adminTemplates/showPrevOrder.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/adminTemplates/prevOrder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/bot/classes.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/classesForBot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compile/compileHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/compile/compileHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/compile/compilingProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/compile/compilingProcess.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generating/generateDOCXReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/generating/generateDOCXReportFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generating/generatePDFReportFile.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/generating/generatePDFReportFile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainDIR/processes/generating/generateTGReportMessage.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/generating/generateTGReportMessage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessLogic/driverClass.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessLogic/parsers/FNS.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/FNS.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessLogic/parsers/INN.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/INN.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessLogic/parsers/bankrupts.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/bankrupts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessLogic/parsers/civilService.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/civilService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessLogic/parsers/issIp.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/issIp.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/businessLogic/parsers/terrorist.py" beforeDir="false" afterPath="$PROJECT_DIR$/businessLogic/parsers/terrorist.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/bot/processes/compile/compilingProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/bot/processes/compile/compilingProcess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/site/processes/compile/compilingProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/site/processes/compile/compilingProcess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/site/src/arialmt.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/site/src/static/arialmt.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/site/src/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/site/src/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/site/src/mainSite.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/site/src/mainSite.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/site/src/templates/yandex_2193512d5ec2b4c5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/site/src/templates/Контакты.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/contacts.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/site/src/templates/Политика.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/policies.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainDIR/site/src/templates/Публичная оферта.html" beforeDir="false" afterPath="$PROJECT_DIR$/mainDIR/site/src/templates/publicOffer.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +93,7 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;/home/desktop/PycharmProjects/docreport/mainDIR/bot/src&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;memory.settings&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -151,11 +105,11 @@
       <recent name="$PROJECT_DIR$/mainDIR/processes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/mainDIR/site/src/static" />
       <recent name="$PROJECT_DIR$/business_logic" />
       <recent name="$PROJECT_DIR$/mainDIR/site/src" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/mainDIR/bot/src" />
-      <recent name="$PROJECT_DIR$/mainDIR/site/processes/misc" />
     </key>
   </component>
   <component name="RunManager" selected="Python.mainBot">
@@ -366,7 +320,15 @@
       <option name="project" value="LOCAL" />
       <updated>1757336886245</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="modded whole files">
+      <option name="closed" value="true" />
+      <created>1758360897550</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1758360897550</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

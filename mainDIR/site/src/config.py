@@ -1,9 +1,12 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_httpauth import HTTPBasicAuth
 from flask_mail import Mail
 from werkzeug.security import generate_password_hash
 
 app = Flask(__name__)
+app.config.from_object(__name__)
+CORS(app)
 regions = ['Адыгея', 'Алтай', 'Алтайский край', 'Амурская область', 'Архангельская область',
            'Астраханская область', 'Башкортостан', 'Белгородская область', 'Брянская область',
            'Бурятия', 'Владимирская область', 'Волгоградская область', 'Вологодская область',

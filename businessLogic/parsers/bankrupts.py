@@ -1,5 +1,5 @@
-import asyncio
 import datetime
+import time
 
 from selenium import webdriver
 from selenium.common import NoSuchElementException
@@ -9,18 +9,17 @@ from selenium.webdriver.common.keys import Keys
 
 from businessLogic.classForParsers import CompiledData
 from mainDIR.bot.src.config import proxies
-from businessLogic.driverClass import DriverClass
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
-driver = DriverClass.driver
+driver = webdriver.Chrome(options=chrome_options)
 url = 'https://bankrot.fedresurs.ru/bankrupts'
 
 
-async def bankrupt(inn):
+def checkBankrupt(inn):
     """
     Возвращает состояние нахождения лица в базе банкротов
 
@@ -30,7 +29,7 @@ async def bankrupt(inn):
     print(datetime.datetime.now(), "BANK")
     try:
         driver.get(url)
-        await asyncio.sleep(3)
+        time.sleep(3)
         inp = driver.find_element(By.XPATH, '/html/body/app-root/section/div[1]/app-bankrupt/div/'
                                                                    'div[1]/div/app-bankrupt-form/div/form/'
                                                                    'app-form-search-string/div/form/div/div/el-input/div/'

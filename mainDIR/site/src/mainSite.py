@@ -5,6 +5,7 @@ from flask import render_template, send_from_directory
 from werkzeug.security import check_password_hash
 
 from config import app, auth, users
+from mainDIR.site.processes.endpoints.endpointAlertYoo import alertYoo
 from mainDIR.site.processes.endpoints.endpointFuse import fuse
 from mainDIR.site.processes.endpoints.endpointGetData import getData
 from mainDIR.site.processes.endpoints.endpointMainThreadGET import handlerGET
@@ -48,7 +49,7 @@ async def handlerCreate():
 
 @app.route('/yookassa/alert', methods=['GET', 'POST'])
 async def handlerAlertYoo():
-    ...
+    return await alertYoo()
 
 
 @app.route('/fuse', methods=['GET', 'POST'])
@@ -58,17 +59,17 @@ async def handlerFuse():
 
 @app.route('/contacts', methods=['GET', 'POST'])
 async def contacts():
-    return render_template('Контакты.html')
+    return render_template('contacts.html')
 
 
 @app.route('/offer', methods=['GET', 'POST'])
 async def offer():
-    return render_template('Публичная оферта.html')
+    return render_template('publicOffer.html')
 
 
 @app.route('/personal-data', methods=['GET', 'POST'])
 async def personal_data():
-    return render_template('Политика.html')
+    return render_template('policies.html')
 
 
 @app.route('/admin')

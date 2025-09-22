@@ -1,12 +1,12 @@
 import datetime
 
-import httpx
+import requests
 
 from businessLogic.classForParsers import CompiledData
 from mainDIR.bot.src.config import proxies
 
 
-async def suggestInnPOST(fullname, birthdate, passport, passportDate):
+def checkINN(fullname, birthdate, passport, passportDate):
     """
     Возвращает ИНН на основе предоставленных данных, используя POST-запрос к сервису Налоговой службы.
 
@@ -34,30 +34,36 @@ async def suggestInnPOST(fullname, birthdate, passport, passportDate):
         birthdate = datetime.datetime.strftime(birthdate, '%d.%m.%Y')
         passportDate = datetime.datetime.strftime(passportDate, '%d.%m.%Y')
 
-        async with httpx.AsyncClient(proxy=proxies.get('https')) as client:
-            data = {
-                "fam": surname,
-                "nam": name,
-                "otch": patronymic,
-                "bdate": birthdate,
-                "bplace": "",
-                "doctype": "21",
-                "docno": passport,
-                "docdt": passportDate,
-                "c": "innMy",
-                "captcha": "",
-                "captchaToken": "",
-            }
-            resp = await client.post(url=url, data=data)
-            resp.raise_for_status()
-            resp = resp.json()
-            if resp.get('code') in (1, 200):
-                CompiledData.inn = resp.get('inn')
-            else:
-                CompiledData.inn = resp.get('code')
-    except Exception as e:
+        data = {
+            "fam": surname,
+            "nam": name,
+            "otch": patronymic,
+            "bdate": birthdate,
+            "bplace": "",
+            "doctype": "21",
+            "docno": passport,
+            "docdt": passportDate,
+            "c": "innMy",
+            "captcha": "",
+            "captchaToken": "",
+        }
+
+        resp = requests.post(url=url, data=data, proxies={'https': proxies.get('https')})
+        resp.raise_for_status()
+        resp = resp.json()
+
+        if resp.get('code') in (1, 200):
+            CompiledData.inn = resp.get('inn')
+        else:
+            CompiledData.inn = resp.get('code')
+
+    except requests.exceptions.RequestException as e:  # Более конкретный обработчик исключений
         print(e)
         return None
+
+    except Exception as e:  # Обрабатываем остальные исключения, если они возникнут
+        print(f"Произошла ошибка: {e}")
+        return None
+
     finally:
         print(datetime.datetime.now(), "INN")
-

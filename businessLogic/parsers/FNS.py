@@ -1,5 +1,5 @@
-import asyncio
 import datetime
+import time
 
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
@@ -12,7 +12,6 @@ from selenium.webdriver.support import expected_conditions as ec
 from businessLogic.captcha import solveCaptcha
 from businessLogic.classForParsers import CompiledData
 from mainDIR.bot.src.config import proxies
-from businessLogic.driverClass import DriverClass
 
 webdriver.DesiredCapabilities.CHROME['proxy'] = proxies
 chrome_options = Options()
@@ -20,7 +19,6 @@ chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
 driver = webdriver.Chrome(options=chrome_options)
-DriverClass.driver = driver
 url = 'https://egrul.nalog.ru/index.html'
 
 
@@ -41,7 +39,7 @@ def captchaForEgrul():
         return TimeoutException
 
 
-async def suggestFNS(inn, fullname):
+def checkFNS(inn, fullname):
     """
     Возвращает состояние нахождения лица в ЕГРЮЛ/ЕГРИП
 
@@ -72,7 +70,7 @@ async def suggestFNS(inn, fullname):
                 pass
 
             WebDriverWait(driver, 10).until(ec.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
-            await asyncio.sleep(0.3)
+            time.sleep(0.3)
 
             try:
                 WebDriverWait(driver, 1).until(ec.visibility_of_element_located((By.XPATH, '//*[@id="noDataFound"]/div/div/p')))
@@ -99,7 +97,7 @@ async def suggestFNS(inn, fullname):
         else:
             inp = driver.find_element(By.XPATH, '//*[@id="query"]')
             WebDriverWait(driver, 10).until(ec.invisibility_of_element_located((By.CLASS_NAME, 'blockUI')))
-            await asyncio.sleep(0.3)
+            time.sleep(0.3)
 
             try:
                 WebDriverWait(driver, 1).until(
