@@ -1,0 +1,152 @@
+networks:
+  db_network:
+    driver: bridge
+
+services:
+  users_db:
+    image: postgres:15-alpine
+    restart: always
+    container_name: users_db
+    environment:
+      POSTGRES_DB: users_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - users_db_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d users_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - db_network
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - db_network
+
+  # broker:
+  #   image: apache/kafka:latest
+  #   hostname: broker
+  #   container_name: broker
+  #   ports:
+  #     - "9092:9092"
+  #   environment:
+  #     KAFKA_BROKER_ID: 1
+  #     KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,CONTROLLER:PLAINTEXT
+  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092
+  #     KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+  #     KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+  #     KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+  #     KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+  #     KAFKA_PROCESS_ROLES: broker,controller
+  #     KAFKA_NODE_ID: 1
+  #     KAFKA_CONTROLLER_QUORUM_VOTERS: 1@broker:29093
+  #     KAFKA_LISTENERS: PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092
+  #     KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+  #     KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+  #     KAFKA_LOG_DIRS: /tmp/kraft-combined-logs
+  #     CLUSTER_ID: MkU3OEVBNTcwNTJENDM2Qk
+  #   networks:
+  #     - kafka_network
+
+
+  # request_site_interface:
+  #   build: ./services/request_site_interface
+  #   restart: always
+  #   container_name: request_site_interface
+  #   ports:
+  #     - "9100:9100"
+  #   environment:
+  #     DATABASE_URL: "postgresql+asyncpg://user:password@postgresql:5432/users_db"
+  #     KAFKA_BROKER: "kafka:9092"
+  #     REDIS_URL: "redis://redis:6379/0"
+  #     SECRET_KEY: "your_super_secret_key_for_jwt_auth"
+  #     PYTHONPATH: /app/src
+  #   depends_on:
+  #     users_db:
+  #       condition: service_healthy
+  #     redis:
+  #       condition: service_started
+  #   networks:
+  #     - db_network
+
+  parsing:
+    build: ./services/parsing
+    restart: always
+    container_name: parsing
+    ports:
+      - "9101:9101"
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://user:password@postgresql:5432/users_db"
+      KAFKA_BROKER: "kafka:9093"
+      REDIS_URL: "redis://redis:6379/0"
+      SECRET_KEY: "your_super_secret_key_for_jwt_auth"
+      PYTHONPATH: /app/src
+    depends_on:
+      users_db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - db_network
+
+  payment:
+    build: ./services/payment
+    restart: always
+    container_name: payment
+    ports:
+     - "9102:9102"
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://user:password@postgresql:5432/users_db"
+      KAFKA_BROKER: "kafka:9092"
+      REDIS_URL: "redis://redis:6379/0"
+      SECRET_KEY: "your_super_secret_key_for_jwt_auth"
+      PYTHONPATH: /app/src
+    depends_on:
+      users_db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - db_network
+
+  generation:
+    build: ./services/report_generation
+    restart: always
+    container_name: generation
+    environment:
+      PYTHONPATH: /app/src
+    ports:
+      - "9103:9103"
+    networks:
+      - db_network
+
+  request_tg_interface:
+    build: ./services/request_tg_interface
+    restart: always
+    container_name: request_tg_interface
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://user:password@postgresql:5432/users_db"
+      KAFKA_BROKER: "kafka:9092"
+      REDIS_URL: "redis://redis:6379/0"
+      SECRET_KEY: "your_super_secret_key_for_jwt_auth"
+      PYTHONPATH: /app/src
+    depends_on:
+      users_db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - db_network
+
+volumes:
+  users_db_data:

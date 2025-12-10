@@ -1,0 +1,19 @@
+from typing import Callable, Dict, Any, Awaitable
+
+from aiogram import BaseMiddleware
+from aiogram.types import TelegramObject
+
+from .session_manager import sessionmanager
+
+
+class DBSessionMiddleware(BaseMiddleware):
+    async def __call__(
+        self,
+        handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
+        event: TelegramObject,
+        data: Dict[str, Any],
+    ) -> Any:
+        async with sessionmanager.session() as session:
+            data["session"] = session
+            result = await handler(event, data)
+        return result
